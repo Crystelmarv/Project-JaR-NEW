@@ -31,7 +31,7 @@ public class Block extends Entity
     case 20:
       g.drawImage(Assets.weiss, x, y, null);
       walkable = true;
-      gegnerInteract = false;
+      gegnerWalkable = true;
       break;
     // hell Blau
     case 21:
@@ -61,7 +61,7 @@ public class Block extends Entity
     case 53:
       g.drawImage(Assets.weiss, x, y, null);
       walkable = true;
-      gegnerInteract = false;
+      gegnerWalkable = true;
       
       if(gespawned == false)
       {

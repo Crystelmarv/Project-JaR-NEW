@@ -13,6 +13,7 @@ public class LevelSpawn extends Entity
   {
     super(xp,yp, blockID, handler);
     walkable = true;
+    gegnerWalkable = true;
   }
 
   @Override

@@ -15,6 +15,7 @@ public class LevelZiel extends Entity
   {
     super(xp, yp, blockID, handler);
     walkable = true;
+    gegnerWalkable = true;
   }
 
   @Override

@@ -123,6 +123,7 @@ public class Handler
 
   public void setPanelGame(PanelGame panelGame)
   {
+   
     this.panelGame = panelGame;
   }
 
@@ -135,6 +136,7 @@ public class Handler
 
   public void setLevelCreator(LevelCreator levelCreator)
   {
+    
     this.levelCreator = levelCreator;
   }
 

@@ -15,6 +15,8 @@ public abstract class Gegner extends Interactables
   
   protected float speed = 1F;
   protected float dx, dy;
+  
+  
 
   public Gegner(int xp, int yp, int blockID, Handler handler)
   {

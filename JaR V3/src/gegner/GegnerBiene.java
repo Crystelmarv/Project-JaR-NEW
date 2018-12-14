@@ -7,7 +7,7 @@ import gui.FrameMain;
 import gui.Handler;
 import resManager.Assets;
 
-public class GegnerMarienKaefer extends Gegner
+public class GegnerBiene extends Gegner
 {
   // Collision
   private boolean topLeft;
@@ -16,37 +16,55 @@ public class GegnerMarienKaefer extends Gegner
   private boolean midRight;
   private boolean bottomLeft;
   private boolean bottomRight;
+  
+  //Timer Stachel
+  private double timeStart;
 
-  public GegnerMarienKaefer(int xp, int yp, int blockID, Handler handler)
+  public GegnerBiene(int xp, int yp, int blockID, Handler handler)
   {
 
     super(xp, yp, blockID, handler);
-    HOEHE = 32;
+
     left = true;
 
-    HITBOX_HOEHE = 32;
-    HITBOX_Y = y + 32;
+   
+    HITBOX_HOEHE = 45;
+    HITBOX_Y = y +18;
+    
+    timeStart = System.nanoTime();
+  }
+
+  @Override
+  public void playerGetroffen()
+  {
+    if (getBounds().intersects(handler.getPlayer().getBounds()))
+    {
+
+      handler.getPlayer().setNichtAngreifbarTimerSet();
+      handler.getLeben().lebenMinus();
+
+    }
 
   }
 
   @Override
   public void paint(Graphics g)
   {
+    walkable = true;
+    gegnerWalkable = true;
 
     if (left == true)
     {
-      g.drawImage(Assets.marienKaeferLinks, x, y + 3, null);
+      g.drawImage(Assets.bieneLinks, x, y + 3, null);
     }
-    if (right == true || left == false && right == false)
+    if (right == true)
     {
-      g.drawImage(Assets.marienKaeferRechts, x, y + 3, null);
+      g.drawImage(Assets.bieneRechts, x, y + 3, null);
     }
+    
+   // g.setColor(Color.red);
+ //   g.fillRect(HITBOX_X, HITBOX_Y, HITBOX_BREITE, HITBOX_HOEHE);
 
-    // show Hitbox
-    /*
-     * g.setColor(Color.red); g.fillRect(HITBOX_X, HITBOX_Y, HITBOX_BREITE,
-     * HITBOX_HOEHE);
-     */
   }
 
   @Override
@@ -57,6 +75,7 @@ public class GegnerMarienKaefer extends Gegner
     move();
     hitboxUpdate();
     playerGetroffen();
+    stachel();
 
   }
 
@@ -65,25 +84,18 @@ public class GegnerMarienKaefer extends Gegner
     HITBOX_X = x;
 
   }
-
-  @Override
-  public void playerGetroffen()
+  
+  public void stachel()
   {
+   double timeNow = System.nanoTime();
 
-    if (getBounds().intersects(handler.getPlayer().getBounds()))
+    if (timeNow - timeStart > 1500000000) //4000000)
     {
-      if (handler.getPlayer().isFall() == true)
-      {
-        handler.getPlayer().setJump();
-        handler.getLevel().removeEntity(gegner);
-      } else
-      {
-        handler.getPlayer().setNichtAngreifbarTimerSet();
-        handler.getLeben().lebenMinus();
-      }
-
+      GegnerBieneStachel stachl = new GegnerBieneStachel(x, y, blockID, handler, right);
+      handler.getLevel().setEntity(stachl);
+     
+     timeStart = timeNow;
     }
-
   }
 
   private void calculateMovement()
@@ -108,32 +120,23 @@ public class GegnerMarienKaefer extends Gegner
 
     // Hin und Her, Fällt nicht runter oder ähnliches
 
-    if (handler.getLevelCreator().levelObjects[getBlockKordinateY((int) toY + HOEHE)][getBlockKordinateX(
-        (int) x + 64 + BREITE - 1)].isGegnerWalkable() == true
-        && handler.getLevelCreator().levelObjects[getBlockKordinateY((int) toY + HOEHE)][getBlockKordinateX(
-            (int) x - 64)].isGegnerWalkable() == true)
+    if (bottomRight == false)
     {
-      left = false;
-      right = false;
-    } else if (bottomRight == false)
-    {
-      right = false;
-      left = true;
+     
 
       // System.out.println("ri");
-    } else if (bottomLeft == false)
+    }
+    if (bottomLeft == false)
     {
 
-      left = false;
-      right = true;
+     
       // System.out.println("le");
 
     }
 
     if (bottomLeft == false && bottomRight == false)
     {
-      left = false;
-      right = false;
+      
     }
     // Collision Left and Right
     calculateCorners(toX, y - 1);

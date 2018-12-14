@@ -1,9 +1,12 @@
 package blocke;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Entity;
 import gegner.Gegner;
+import gegner.GegnerBiene;
+import gegner.GegnerFisch;
 import gegner.GegnerMarienKaefer;
 import gui.Handler;
 import resManager.Assets;
@@ -16,13 +19,16 @@ public class GegnerSpawn extends Entity
   {
     super(xp,yp, blockID, handler);
     walkable = true;
-    gegnerInteract = false;
+    gegnerWalkable = true;
+    init();
   }
 
   @Override
   public void paint(Graphics g)
   {
     g.drawImage(Assets.weiss, x, y, null);
+    
+   
     
   }
 
@@ -40,17 +46,18 @@ public class GegnerSpawn extends Entity
 
     case 71:
       gegner = new GegnerMarienKaefer(x, y, blockID, handler);
-      System.out.println("MARRR");
+     
       break;
-  /*    
+      
     case 72:
-      aktuellerGegner = new GegnerBiene(gameStates, x, y);
+      gegner = new GegnerBiene(x, y, blockID, handler);
+      
       break;
     case 73:
       
-      aktuellerGegner = new GegnerFisch(gameStates, x, y);
+      gegner = new GegnerFisch(x, y, blockID, handler);
       break;
-*/
+
     }
     handler.getLevel().setEntity(gegner);
 

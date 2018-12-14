@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import gui.FrameMain;
 import gui.Handler;
 import items.Item;
+import items.ItemFeuerKugel;
 
 public class Player
 {
@@ -57,8 +58,10 @@ public class Player
   private int checkpointX;
 
   // Items
-  private String aktivesItem = "null";
+  private String aktivesItem = "feuer";
   private Item akItem;
+  private boolean timerGesetztItem = false;
+  private double anfangsTimeItem;
   
   //Angreifbar
   private boolean angreifbar = true;
@@ -131,6 +134,8 @@ public class Player
     calculateMovement();
     calculateCollision();
     move();
+    item();
+    nichtAngreifbar();
 
   }
 
@@ -204,7 +209,7 @@ public class Player
 
     // Collision Top and Bottom
     calculateCorners(x, toY);
-
+   // System.out.println("00"+handler.getLevelCreator().levelObjects[getBlockKordinateY((int) toY + HOEHE)][ getBlockKordinateX((int) x + BREITE - 1)].walkable);
     if (topLeft == true || topRight == true)
     {
       dy = 0;
@@ -258,6 +263,11 @@ public class Player
     int midTile = getBlockKordinateY((int) y + HOEHE / 2);
     int bottomTile = getBlockKordinateY((int) y + HOEHE);
     
+    if(bottomRight == true)
+    {
+      //System.out.println("0"+bottomRight);
+    }
+   
     if (handler.getLevelCreator().levelObjects[topTile][leftTile].walkable == true)
     {
       topLeft = false;
@@ -304,10 +314,11 @@ public class Player
       bottomRight = false;
     } else
     {
+      
       bottomRight = true;
     }
     // System.out.println(Level.map[bottomTile][leftTile]);
-    // System.out.println(game.level.blocke[bottomTile][rightTile].walkable);
+    
 
   }
   
@@ -387,6 +398,43 @@ public class Player
     }
   }
   
+  public void item()
+  {
+    double timeNow = System.nanoTime() / 1000000;
+    if (interaction == true)
+    {
+      if (timerGesetztItem == false)
+      {
+        anfangsTimeItem = System.nanoTime() / 1000000;
+        timerGesetztItem = true;
+
+        switch (aktivesItem)
+        {
+        case "none":
+
+          break;
+
+        case "feuer":
+
+          akItem = new ItemFeuerKugel(x, y, 0, handler);
+
+          handler.getLevel().setEntity(akItem);
+          break;
+        }
+
+      } else
+      {
+
+        if (timeNow - anfangsTimeItem > 500)
+        {
+          timerGesetztItem = false;
+
+        }
+      }
+    }
+
+  }
+  
   public void sterben()
   {
     
@@ -437,5 +485,25 @@ public class Player
   {
     return new Rectangle(x, y, BREITE, HOEHE);
   }
+  public boolean isJump()
+  {
+    return jump;
+  }
+  public void setJump()
+  {
+    fall = false;
+    jump = true;
+    
+  }
+  public boolean isFall()
+  {
+    return fall;
+  }
+  public void setAktivesItem(String aktivesItem)
+  {
+    this.aktivesItem = aktivesItem;
+  }
+  
+  
 
 }

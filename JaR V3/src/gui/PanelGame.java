@@ -49,6 +49,7 @@ public class PanelGame extends JPanel
     {
       level = new Level(handler);
     
+    
       levelErstellt = true;
     }
     if (StateManager.getState().equals(handler.getStateGame()) && levelErstellt == true)

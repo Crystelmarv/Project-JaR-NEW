@@ -13,7 +13,7 @@ public abstract class Entity
   protected int HOEHE = 64;
   protected int blockID;
   protected boolean walkable = false;
-  protected boolean gegnerInteract = true;
+  protected boolean gegnerWalkable = false;
   protected Handler handler;
   
     
@@ -31,7 +31,7 @@ public abstract class Entity
   abstract public void paint(Graphics g);
   abstract public void update();
   
-  protected Rectangle getBounds()
+  public Rectangle getBounds()
   {
     return new Rectangle(x, y, BREITE, HOEHE);
   }
@@ -41,9 +41,21 @@ public abstract class Entity
     return walkable;
   }
   
-  public boolean isGegnerInteract()
+  public boolean isGegnerWalkable()
   {
-    return gegnerInteract;
+    return gegnerWalkable;
   }
+
+  public int getX()
+  {
+    return x;
+  }
+
+  public int getY()
+  {
+    return y;
+  }
+  
+  
 
 }

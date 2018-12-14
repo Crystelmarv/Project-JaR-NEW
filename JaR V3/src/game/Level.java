@@ -25,13 +25,14 @@ public class Level
   public Level(Handler handler) throws IOException
   {
     this.handler = handler;
+    handler.setLevel(this);
     levelCreator = new LevelCreator(handler);
     LevelFileReader.levelDateiLesen();
     levelCreator.levelErstellen();
     anzeigeApfel = new AnzeigeApfel(handler);
     leben = new Leben(handler);
     
-    handler.setLevel(this);
+  
     handler.setLevelCreator(levelCreator);
     handler.setAnzeigeApfel(anzeigeApfel);
     handler.setLeben(leben);
@@ -134,5 +135,10 @@ public class Level
   public void removeEntity(Entity ent)
   {
     entityList.remove(ent);
+  }
+  
+  public int getEntityListSize()
+  {
+    return entityList.size();
   }
 }

@@ -18,7 +18,8 @@ public class Assets
   public static BufferedImage gras, erde, blauerBlock, orangerBlock, schild, orangerBlockOhneKreuz, apfel, 
                               marienKaeferLinks, marienKaeferRechts, checkPointUnten, checkPointObenAus, 
                               checkPointObenAn, bieneLinks, bieneRechts, wasser, seerose, devBlock, herz,
-                              fischOben, fischUnten, tod, spawn, ziel, weiss, blau;
+                              fischOben, fischUnten, tod, spawn, ziel, weiss, blau, itemFeuerKugel, itemFeuer,
+                              itemSchuh, itemLebenPlus;
 
   public void init()
   {
@@ -56,6 +57,10 @@ public class Assets
     ziel = sheet.crop(breite*2, hoehe*4, breite, hoehe);
     weiss = sheet.crop(breite*3, hoehe*4, breite, hoehe);
     blau = sheet.crop(breite*4, hoehe*4, breite, hoehe);
+    itemFeuerKugel = sheet.crop(breite*5, 0, breite, hoehe);
+    itemFeuer = sheet.crop(breite*6, 0, breite, hoehe);
+    itemSchuh = sheet.crop(breite*7, 0, breite, hoehe);
+    itemLebenPlus = sheet.crop(breite*8, 0, breite, hoehe);
     
     
 

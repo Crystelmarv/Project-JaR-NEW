@@ -43,12 +43,32 @@ public class BlockZerstoerbar extends Entity
       handler.getPlayer().setFall();
       getroffen = true;
       zerströren();
+      isGegnerOnTop();
     }
   }
 
   private void zerströren()
   {
     walkable = true;
+    gegnerWalkable = true;
+  }
+  
+  private void isGegnerOnTop()
+  {
+    int i, gegnerX, gegnerY;
+    
+    
+    for(i = 0; i < handler.getLevel().getEntityListSize(); i++)
+    {
+      gegnerX = handler.getLevel().getEntity(i).getX();
+      gegnerY = handler.getLevel().getEntity(i).getY();
+      
+      if(gegnerX > x - 59 && gegnerX < x + 59
+          && gegnerY == y - 64)
+      {
+        handler.getLevel().removeEntity(handler.getLevel().getEntity(i));
+      }
+    }
   }
 
 }

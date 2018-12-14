@@ -73,7 +73,7 @@ public class LevelCreator
         case 51:
         case 52:
         case 54:
-          // levelObjects[iy][ix] = new BlockItem(x, y, levelID[iy][ix]);
+           levelObjects[iy][ix] = new BlockItem(x, y, levelID[iy][ix], handler);
 
           if (levelID[iy][ix] == 52)
           {
@@ -111,6 +111,7 @@ public class LevelCreator
         case 73:
          
            levelObjects[iy][ix] = new GegnerSpawn(x, y, levelID[iy][ix], handler);
+           
           break;
 
         default:
