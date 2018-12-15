@@ -2,34 +2,46 @@ package states;
 
 import java.awt.Graphics;
 
-import gui.Handler;
+import game.Handler;
+import gui.PanelEditorLevel;
 
 public class StateEditor extends State
 {
+  private PanelEditorLevel panelEditorLevel;
+  private boolean frameErstellt = false;
 
   public StateEditor(Handler handler)
   {
     super(handler);
+    panelEditorLevel = new PanelEditorLevel(handler);
+    handler.getFrameMain().add(panelEditorLevel);
   }
 
   @Override
   public void update()
   {
-    // TODO Auto-generated method stub
+    if(frameErstellt == true)
+    {
+      panelEditorLevel.update();
+    }
+  
   
   }
 
   @Override
   public void paint(Graphics g)
   {
-    // TODO Auto-generated method stub
+    panelEditorLevel.paint(g);
     
   }
 
   @Override
   public void stateUpdate()
   {
-    // TODO Auto-generated method stub
+    panelEditorLevel.setVisible(true);
+    panelEditorLevel.PanelErstellen();
+    frameErstellt = true;
+   
     
   }
 

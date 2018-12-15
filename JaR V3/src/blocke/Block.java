@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Entity;
-import gui.Handler;
+import game.Handler;
 import items.Item;
 import items.ItemApfel;
 import resManager.Assets;
@@ -48,6 +48,8 @@ public class Block extends Entity
       //Wasser
     case 33:
       g.drawImage(Assets.wasser, x, y, null);
+      walkable = true;
+      gegnerWalkable = true;
       break;
       //Seerose
     case 34:
@@ -56,6 +58,7 @@ public class Block extends Entity
       //DevBlock
     case 22:
       g.drawImage(Assets.devBlock, x, y, null);
+      walkable = true;
       break;
     
     case 53:

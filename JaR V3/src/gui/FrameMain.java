@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.undo.StateEdit;
 
+import game.Handler;
 import states.State;
 import states.StateEditor;
 import states.StateGame;
@@ -90,14 +91,29 @@ public class FrameMain extends JFrame
       @Override
       public void keyReleased(KeyEvent e)
       {
-        handler.getPlayer().keyReleased(e);
+        if(StateManager.getState().equals(handler.getStateGame()))
+        {
+          handler.getPlayer().keyReleased(e);
+            }
+        if(StateManager.getState().equals(handler.getStateEditor()))
+        {
+          handler.getPanelLevelEditor().keyReleased(e);
+        }
+        
 
       }
 
       @Override
       public void keyPressed(KeyEvent e)
       {
+        if(StateManager.getState().equals(handler.getStateGame()))
+        {
         handler.getPlayer().keyPressed(e);
+        }
+        if(StateManager.getState().equals(handler.getStateEditor()))
+        {
+        handler.getPanelLevelEditor().keyPressed(e);
+        }
       }
     });
 

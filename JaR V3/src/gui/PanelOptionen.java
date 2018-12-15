@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import game.Handler;
 import states.StateManager;
 
 public class PanelOptionen extends JPanel implements ActionListener

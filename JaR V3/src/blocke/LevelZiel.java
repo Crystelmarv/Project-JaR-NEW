@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import game.Entity;
-import gui.Handler;
+import game.Handler;
 import resManager.Assets;
 import states.StateManager;
 

@@ -3,8 +3,8 @@ package gegner;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import game.Handler;
 import game.LevelCreator;
-import gui.Handler;
 import resManager.Assets;
 
 public class GegnerFisch extends Gegner

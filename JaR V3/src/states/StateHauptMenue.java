@@ -2,7 +2,7 @@ package states;
 
 import java.awt.Graphics;
 
-import gui.Handler;
+import game.Handler;
 import gui.PanelHauptMenue;
 
 public class StateHauptMenue extends State

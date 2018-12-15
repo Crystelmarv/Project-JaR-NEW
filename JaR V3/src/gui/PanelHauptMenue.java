@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import game.Handler;
 import states.StateGame;
 import states.StateManager;
 
@@ -58,7 +59,7 @@ public class PanelHauptMenue extends JPanel implements ActionListener
     {
       setVisible(false);
       handler.getFrameMain().repaint();
-      StateManager.setState(handler.getStateGame());
+      StateManager.setState(handler.getStateLevelSelect());
       StateManager.getState().stateUpdate();
 
     } else if (e.getSource().equals(buttonLevelEditor))

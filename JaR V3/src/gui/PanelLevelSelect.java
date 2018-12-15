@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import game.Handler;
+import resManager.LevelFileReader;
+import states.StateGame;
 import states.StateManager;
 
 public class PanelLevelSelect extends JPanel implements ActionListener
@@ -53,6 +56,8 @@ public class PanelLevelSelect extends JPanel implements ActionListener
   @Override
   public void actionPerformed(ActionEvent e)
   {
+    int i;
+    
     if (e.getSource().equals(buttonZurueck))
     {
       setVisible(false);
@@ -62,6 +67,18 @@ public class PanelLevelSelect extends JPanel implements ActionListener
 
     } else
     {
+      for (i = 0; i < ANZAHLLEVEL; i++)
+      {
+        if(e.getSource().equals(bts[i]))
+        {
+          setVisible(false);
+        
+          LevelFileReader.setLevelPfad("/level/"+(i+1)+".Level.txt");
+        
+          StateManager.setState(handler.getStateGame());
+          StateManager.getState().stateUpdate();
+        }
+      }
 
     }
 

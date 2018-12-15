@@ -5,13 +5,14 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.io.IOException;
 
-import gui.Handler;
+import game.Handler;
 import gui.PanelGame;
 import gui.PanelLevelSelect;
 
 public class StateGame extends State
 {
   private PanelGame panelGame;
+  private int aktuelesLevel;
 
   public StateGame(Handler handler) throws IOException
   {
@@ -42,8 +43,21 @@ public class StateGame extends State
   {
    
     panelGame.setVisible(true);
+    panelGame.setLevelErstellt(false);
     
   }
+
+  public int getAktuelesLevel()
+  {
+    return aktuelesLevel;
+  }
+
+  public void setAktuelesLevel(int aktuelesLevel)
+  {
+    this.aktuelesLevel = aktuelesLevel;
+  }
+  
+  
 
  
 }

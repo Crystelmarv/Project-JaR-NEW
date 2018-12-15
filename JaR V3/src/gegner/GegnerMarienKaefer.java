@@ -3,8 +3,8 @@ package gegner;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import game.Handler;
 import gui.FrameMain;
-import gui.Handler;
 import resManager.Assets;
 
 public class GegnerMarienKaefer extends Gegner

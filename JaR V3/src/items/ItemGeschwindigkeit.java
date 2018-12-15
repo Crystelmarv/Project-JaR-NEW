@@ -5,10 +5,10 @@ import java.awt.Graphics;
 import game.Handler;
 import resManager.Assets;
 
-public class ItemLebenPlus extends Item
+public class ItemGeschwindigkeit extends Item
 {
 
-  public ItemLebenPlus(int xp, int yp, int blockID, Handler handler)
+  public ItemGeschwindigkeit(int xp, int yp, int blockID, Handler handler)
   {
     super(xp, yp, blockID, handler);
   }
@@ -16,24 +16,21 @@ public class ItemLebenPlus extends Item
   @Override
   public void paint(Graphics g)
   {
-    g.drawImage(Assets.itemLebenPlus, x, y, null);
+    g.drawImage(Assets.itemSchuh, x, y, null);
 
-
-    
   }
 
   @Override
   public void update()
   {
     intersect();
-    
   }
-
+  
   private void intersect()
   {
     if(getBounds().intersects(handler.getPlayer().getBounds()))
     {
-      handler.getLeben().lebenPlus();
+      handler.getItemManager().setAktivesItem("geschwindigkeit");
       handler.getLevel().removeEntity(item);
     }
     

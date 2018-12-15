@@ -8,7 +8,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import gui.FrameMain;
-import gui.Handler;
 import items.Item;
 import items.ItemFeuerKugel;
 
@@ -31,7 +30,9 @@ public class Player
   private boolean right = false;
   private boolean left = false;
 
-  private float speed = 4.75f;
+
+  private final float DEFAULT_SPEED = 4.75f; 
+  private float speed = DEFAULT_SPEED;
   private float gravity = 0.22f;
   private float maxFallingSpeed = 5.5f;
   private float jumpStart = -8.7f;
@@ -58,10 +59,8 @@ public class Player
   private int checkpointX;
 
   // Items
-  private String aktivesItem = "feuer";
-  private Item akItem;
-  private boolean timerGesetztItem = false;
-  private double anfangsTimeItem;
+  private PlayerItemManager itemManager;
+ 
   
   //Angreifbar
   private boolean angreifbar = true;
@@ -76,57 +75,16 @@ public class Player
     this.handler = handler;
  
     handler.setPlayer(this);
+    
+    itemManager = new PlayerItemManager(handler);
+    handler.setItemManager(itemManager);
+    
     x = handler.getLevelCreator().getPlayerSpawnX();  
     y = handler.getLevelCreator().getPlayerSpawnY();  
    
     checkpointX = x;
     checkpointY = y;
     
-    KeyListener listener = new KeyListener()
-        {
-
-          @Override
-          public void keyPressed(KeyEvent e)
-          {
-            int key = e.getKeyCode();
-
-            switch (key)
-            {
-            case KeyEvent.VK_UP:
-              if (fall == false)
-              {
-                jump = true;
-              }
-              break;
-            case KeyEvent.VK_LEFT:
-              left = true;
-              break;
-            case KeyEvent.VK_RIGHT:
-              right = true;
-              break;
-            case KeyEvent.VK_SPACE:
-              interaction = true;
-              break;
-            }
-            
-          }
-
-          @Override
-          public void keyReleased(KeyEvent e)
-          {
-            // TODO Auto-generated method stub
-            
-          }
-
-          @Override
-          public void keyTyped(KeyEvent e)
-          {
-            // TODO Auto-generated method stub
-            
-          }
-        
-        };
-    handler.getPanelGame().addKeyListener(keyListener);
 
   }
   public void update()
@@ -134,7 +92,7 @@ public class Player
     calculateMovement();
     calculateCollision();
     move();
-    item();
+    itemManager.update();
     nichtAngreifbar();
 
   }
@@ -174,6 +132,21 @@ public class Player
     case KeyEvent.VK_SPACE:
       interaction = true;
       break;
+    case KeyEvent.VK_SHIFT:
+      interaction = true;
+      break;
+    case KeyEvent.VK_W:
+      if (fall == false)
+      {
+        jump = true;
+      }
+      break;
+    case KeyEvent.VK_A:
+      left = true;
+      break;
+    case KeyEvent.VK_D:
+      right = true;
+      break;
     }
   }
 
@@ -192,6 +165,15 @@ public class Player
       break;
     case KeyEvent.VK_SPACE:
       interaction = false;
+      break;
+    case KeyEvent.VK_SHIFT:
+      interaction = false;
+      break;
+    case KeyEvent.VK_A:
+      left = false;
+      break;
+    case KeyEvent.VK_D:
+      right = false;
       break;
     }
   }
@@ -398,42 +380,7 @@ public class Player
     }
   }
   
-  public void item()
-  {
-    double timeNow = System.nanoTime() / 1000000;
-    if (interaction == true)
-    {
-      if (timerGesetztItem == false)
-      {
-        anfangsTimeItem = System.nanoTime() / 1000000;
-        timerGesetztItem = true;
-
-        switch (aktivesItem)
-        {
-        case "none":
-
-          break;
-
-        case "feuer":
-
-          akItem = new ItemFeuerKugel(x, y, 0, handler);
-
-          handler.getLevel().setEntity(akItem);
-          break;
-        }
-
-      } else
-      {
-
-        if (timeNow - anfangsTimeItem > 500)
-        {
-          timerGesetztItem = false;
-
-        }
-      }
-    }
-
-  }
+ 
   
   public void sterben()
   {
@@ -499,10 +446,20 @@ public class Player
   {
     return fall;
   }
-  public void setAktivesItem(String aktivesItem)
+
+  public boolean isInteraction()
   {
-    this.aktivesItem = aktivesItem;
+    return interaction;
   }
+  public float getDEFAULT_SPEED()
+  {
+    return DEFAULT_SPEED;
+  }
+  public void setSpeed(float speed)
+  {
+    this.speed = speed;
+  }
+ 
   
   
 

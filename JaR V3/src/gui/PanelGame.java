@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import game.Handler;
 import game.Kamera;
 import game.Level;
 import game.LevelCreator;
@@ -73,6 +74,11 @@ public class PanelGame extends JPanel
     
 
     }
+  }
+
+  public void setLevelErstellt(boolean levelErstellt)
+  {
+    this.levelErstellt = levelErstellt;
   }
 
 

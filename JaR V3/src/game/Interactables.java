@@ -2,8 +2,6 @@ package game;
 
 import java.awt.Rectangle;
 
-import gui.Handler;
-
 public abstract class Interactables extends Entity
 {
   protected int HITBOX_X = x;

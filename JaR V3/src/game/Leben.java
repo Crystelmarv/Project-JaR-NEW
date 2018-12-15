@@ -2,8 +2,8 @@ package game;
 
 import java.awt.Graphics;
 
-import gui.Handler;
 import resManager.Assets;
+import states.StateManager;
 
 public class Leben
 {
@@ -50,7 +50,10 @@ public class Leben
   {
     if(aktuelleLeben <= 0)
     {
-      handler.getPlayer().sterben();
+      handler.getPanelGame().setVisible(false);
+      handler.getFrameMain().repaint();
+      StateManager.setState(handler.getStateLevelSelect());
+      StateManager.getState().stateUpdate();
     }
   }
   

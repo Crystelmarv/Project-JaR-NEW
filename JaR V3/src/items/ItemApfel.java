@@ -2,7 +2,7 @@ package items;
 
 import java.awt.Graphics;
 
-import gui.Handler;
+import game.Handler;
 import resManager.Assets;
 
 public class ItemApfel extends Item

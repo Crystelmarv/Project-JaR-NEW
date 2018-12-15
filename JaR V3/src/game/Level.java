@@ -8,8 +8,8 @@ import java.util.ArrayList;
 
 import javax.swing.RepaintManager;
 
-import gui.Handler;
 import resManager.LevelFileReader;
+import states.StateGame;
 
 public class Level
 {
@@ -19,6 +19,7 @@ public class Level
   private Kamera kamera;
   private LevelCreator levelCreator;
   private AnzeigeApfel anzeigeApfel;
+  private AnzeigeAktuellesItem anzeigeAktuellesItem;
   private Leben leben;
   private ArrayList<Entity> entityList = new ArrayList<>();
 
@@ -26,10 +27,12 @@ public class Level
   {
     this.handler = handler;
     handler.setLevel(this);
+  
     levelCreator = new LevelCreator(handler);
     LevelFileReader.levelDateiLesen();
     levelCreator.levelErstellen();
     anzeigeApfel = new AnzeigeApfel(handler);
+    anzeigeAktuellesItem = new AnzeigeAktuellesItem(handler);
     leben = new Leben(handler);
     
   
@@ -76,6 +79,7 @@ public class Level
       
       leben.paint(g);
       anzeigeApfel.paint(g);
+      anzeigeAktuellesItem.paint(g);;
       player.paint(g2d);
 
       ///////////////////////////////////
@@ -107,6 +111,7 @@ public class Level
     
     leben.update();
     anzeigeApfel.update();
+    anzeigeAktuellesItem.update();
     kamera.update(player);
     player.update();
 

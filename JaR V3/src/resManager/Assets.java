@@ -13,13 +13,13 @@ public class Assets
   private static int breite = 64;
   private static int hoehe = 64;
 
-  public static BufferedImage[] texturen = new BufferedImage[18];
+  public static BufferedImage[] texturen = new BufferedImage[21];
 
   public static BufferedImage gras, erde, blauerBlock, orangerBlock, schild, orangerBlockOhneKreuz, apfel, 
                               marienKaeferLinks, marienKaeferRechts, checkPointUnten, checkPointObenAus, 
                               checkPointObenAn, bieneLinks, bieneRechts, wasser, seerose, devBlock, herz,
                               fischOben, fischUnten, tod, spawn, ziel, weiss, blau, itemFeuerKugel, itemFeuer,
-                              itemSchuh, itemLebenPlus;
+                              itemSchuh, itemLebenPlus, anzeigeAktuellesItem;
 
   public void init()
   {
@@ -61,6 +61,8 @@ public class Assets
     itemFeuer = sheet.crop(breite*6, 0, breite, hoehe);
     itemSchuh = sheet.crop(breite*7, 0, breite, hoehe);
     itemLebenPlus = sheet.crop(breite*8, 0, breite, hoehe);
+    anzeigeAktuellesItem = sheet.crop(breite*5, hoehe, breite, hoehe);
+
     
     
 
@@ -82,13 +84,16 @@ public class Assets
     texturen[15] = ziel;
     texturen[16] = weiss;
     texturen[17] = blau;
+    texturen[18] = itemFeuer;
+    texturen[19] = itemSchuh;
+    texturen[20] = itemLebenPlus;
     
 
     
 
   }
 
-  public String getID(int texture)
+  public static String getID(int texture)
   {
     String id = "";
     switch (texture)
@@ -146,6 +151,15 @@ public class Assets
       break;
     case 17:
       id = "21";
+      break;
+    case 18:
+      id = "54";
+      break;
+    case 19:
+      id = "55";
+      break;
+    case 20:
+      id = "51";
       break;
       
       

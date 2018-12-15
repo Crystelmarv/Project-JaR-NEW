@@ -1,7 +1,7 @@
 package gegner;
 
+import game.Handler;
 import game.Interactables;
-import gui.Handler;
 
 public abstract class Gegner extends Interactables
 {

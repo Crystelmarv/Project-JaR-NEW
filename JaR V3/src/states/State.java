@@ -3,7 +3,7 @@ package states;
 import java.awt.Graphics;
 import java.io.IOException;
 
-import gui.Handler;
+import game.Handler;
 
 public abstract class State
 {

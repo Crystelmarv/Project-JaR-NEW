@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Entity;
+import game.Handler;
 import gegner.Gegner;
 import gegner.GegnerBiene;
 import gegner.GegnerFisch;
 import gegner.GegnerMarienKaefer;
-import gui.Handler;
 import resManager.Assets;
 
 public class GegnerSpawn extends Entity

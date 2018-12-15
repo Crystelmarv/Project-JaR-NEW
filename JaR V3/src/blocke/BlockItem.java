@@ -3,10 +3,11 @@ package blocke;
 import java.awt.Graphics;
 
 import game.Entity;
-import gui.Handler;
+import game.Handler;
 import items.Item;
 import items.ItemApfel;
 import items.ItemFeuer;
+import items.ItemGeschwindigkeit;
 import items.ItemLebenPlus;
 import resManager.Assets;
 
@@ -54,6 +55,9 @@ public class BlockItem extends Entity
         break;
       case 54:
         item = new ItemFeuer(x, y-63, blockID, handler);
+        break;
+      case 55:
+        item = new ItemGeschwindigkeit(x, y-63, blockID, handler);
         break;
 
       }

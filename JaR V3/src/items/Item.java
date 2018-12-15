@@ -1,7 +1,7 @@
 package items;
 
+import game.Handler;
 import game.Interactables;
-import gui.Handler;
 
 public abstract class Item extends Interactables
 {

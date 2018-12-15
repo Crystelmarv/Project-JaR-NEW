@@ -3,7 +3,7 @@ package states;
 
 import java.awt.Graphics;
 
-import gui.Handler;
+import game.Handler;
 import gui.PanelLevelSelect;
 
 public class StateLevelSelect extends State

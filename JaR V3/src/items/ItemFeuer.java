@@ -2,7 +2,7 @@ package items;
 
 import java.awt.Graphics;
 
-import gui.Handler;
+import game.Handler;
 import resManager.Assets;
 
 public class ItemFeuer extends Item
@@ -31,7 +31,7 @@ public class ItemFeuer extends Item
     if(getBounds().intersects(handler.getPlayer().getBounds()))
     {
       handler.getLevel().removeEntity(item);
-      handler.getPlayer().setAktivesItem("feuer");
+      handler.getItemManager().setAktivesItem("feuer");
     }
     
   }

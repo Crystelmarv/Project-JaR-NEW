@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Entity;
-import gui.Handler;
+import game.Handler;
 import resManager.Assets;
 
 

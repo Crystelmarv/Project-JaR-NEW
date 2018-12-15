@@ -13,7 +13,6 @@ import blocke.LevelSpawn;
 import blocke.LevelTod;
 import blocke.LevelZiel;
 import gui.FrameMain;
-import gui.Handler;
 import resManager.LevelFileReader;
 
 public class LevelCreator
@@ -73,6 +72,7 @@ public class LevelCreator
         case 51:
         case 52:
         case 54:
+        case 55:
            levelObjects[iy][ix] = new BlockItem(x, y, levelID[iy][ix], handler);
 
           if (levelID[iy][ix] == 52)
