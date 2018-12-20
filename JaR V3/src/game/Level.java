@@ -93,7 +93,7 @@ public class Level
   {
     int iy, ix;
 
-    // noch in klasse level verschieben
+
     for (iy = 0; iy < LevelCreator.levelID.length; iy++)
     {
       for (ix = 0; ix < LevelCreator.levelID[0].length; ix++)

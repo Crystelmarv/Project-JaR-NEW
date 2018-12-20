@@ -49,7 +49,7 @@ public class PlayerItemManager
 
         case "feuer":
 
-          akItem = new ItemFeuerKugel(handler.getPlayer().getX(), handler.getPlayer().getY(), 0, handler);
+          akItem = new ItemFeuerKugel(handler.getPlayer().getX(), handler.getPlayer().getY(), 0, handler, handler.getPlayer().isLastPositionRight());
 
           handler.getLevel().setEntity(akItem);
           break;
@@ -91,6 +91,7 @@ public class PlayerItemManager
     {
     case "feuer":
       item = new ItemFeuer(handler.getPlayer().getX()-128, handler.getPlayer().getY(), 0, handler);
+      
       
       break;
     case "geschwindigkeit":

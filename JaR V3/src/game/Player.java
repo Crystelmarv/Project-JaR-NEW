@@ -29,6 +29,8 @@ public class Player
   private boolean fall = false;
   private boolean right = false;
   private boolean left = false;
+  
+  private boolean lastPositionRight = false;
 
 
   private final float DEFAULT_SPEED = 4.75f; 
@@ -68,7 +70,7 @@ public class Player
   private boolean timerGesetzt = false;
   double anfangsTime;
 
-  private KeyListener keyListener;
+
 
   public Player(Handler handler)
   {
@@ -125,9 +127,11 @@ public class Player
       break;
     case KeyEvent.VK_LEFT:
       left = true;
+      lastPositionRight = false;
       break;
     case KeyEvent.VK_RIGHT:
       right = true;
+      lastPositionRight = true;
       break;
     case KeyEvent.VK_SPACE:
       interaction = true;
@@ -458,6 +462,14 @@ public class Player
   public void setSpeed(float speed)
   {
     this.speed = speed;
+  }
+  public boolean isLastPositionRight()
+  {
+    return lastPositionRight;
+  }
+  public void setLastPositionRight(boolean lastPositionRight)
+  {
+    this.lastPositionRight = lastPositionRight;
   }
  
   

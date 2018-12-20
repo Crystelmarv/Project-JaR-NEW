@@ -7,6 +7,7 @@ import game.Entity;
 import game.Handler;
 import gegner.Gegner;
 import gegner.GegnerBiene;
+import gegner.GegnerEichhoernchen;
 import gegner.GegnerFisch;
 import gegner.GegnerMarienKaefer;
 import resManager.Assets;
@@ -17,7 +18,7 @@ public class GegnerSpawn extends Entity
 
   public GegnerSpawn(int xp, int yp, int blockID, Handler handler)
   {
-    super(xp,yp, blockID, handler);
+    super(xp, yp, blockID, handler);
     walkable = true;
     gegnerWalkable = true;
     init();
@@ -26,19 +27,27 @@ public class GegnerSpawn extends Entity
   @Override
   public void paint(Graphics g)
   {
-    g.drawImage(Assets.weiss, x, y, null);
-    
-   
-    
+
+    switch (blockID)
+    {
+    case 73:
+      g.drawImage(Assets.wasser, x, y, null);
+      break;
+    default:
+      g.drawImage(Assets.weiss, x, y, null);
+      break;
+
+    }
+
   }
 
   @Override
   public void update()
   {
     // TODO Auto-generated method stub
-    
+
   }
-  
+
   public void init()
   {
     switch (blockID)
@@ -46,17 +55,22 @@ public class GegnerSpawn extends Entity
 
     case 71:
       gegner = new GegnerMarienKaefer(x, y, blockID, handler);
-     
+
       break;
-      
+
     case 72:
       gegner = new GegnerBiene(x, y, blockID, handler);
-      
+
       break;
     case 73:
-      
+
       gegner = new GegnerFisch(x, y, blockID, handler);
       break;
+    case 74:
+
+      gegner = new GegnerEichhoernchen(x, y, blockID, handler);
+      break;
+      
 
     }
     handler.getLevel().setEntity(gegner);

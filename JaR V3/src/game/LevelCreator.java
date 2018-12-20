@@ -6,6 +6,7 @@ import java.io.IOException;
 import blocke.Block;
 import blocke.BlockItem;
 import blocke.BlockSchild;
+import blocke.BlockTrampolin;
 import blocke.BlockZerstoerbar;
 import blocke.GegnerSpawn;
 import blocke.LevelCheckpoint;
@@ -55,6 +56,7 @@ public class LevelCreator
         case 34:
         case 22:
         case 53:
+        
           levelObjects[iy][ix] = new Block(x, y, levelID[iy][ix], handler);
           
           if (levelID[iy][ix] == 53)
@@ -109,10 +111,16 @@ public class LevelCreator
         case 71:
         case 72:
         case 73:
+        case 74:
          
            levelObjects[iy][ix] = new GegnerSpawn(x, y, levelID[iy][ix], handler);
            
           break;
+          
+          //Trampolin
+        case 35:
+          levelObjects[iy][ix] = new BlockTrampolin(x, y, levelID[iy][ix], handler);
+         break;
 
         default:
           break;

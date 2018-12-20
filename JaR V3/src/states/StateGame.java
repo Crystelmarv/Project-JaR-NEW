@@ -5,26 +5,38 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.io.IOException;
 
+import javax.swing.JDialog;
+
 import game.Handler;
+import gui.DialogPause;
 import gui.PanelGame;
 import gui.PanelLevelSelect;
 
 public class StateGame extends State
 {
   private PanelGame panelGame;
+ 
   private int aktuelesLevel;
+  
+  private boolean pause = false;
 
   public StateGame(Handler handler) throws IOException
   {
     super(handler);
     panelGame = new PanelGame(handler);
     handler.getFrameMain().add(panelGame);
+    
+   
   }
 
   @Override
   public void update() throws IOException
   {
-    panelGame.update();
+    if(pause == false)
+    {
+      panelGame.update();
+    }
+    
 
     
   }
@@ -55,6 +67,11 @@ public class StateGame extends State
   public void setAktuelesLevel(int aktuelesLevel)
   {
     this.aktuelesLevel = aktuelesLevel;
+  }
+
+  public void setPause(boolean pause)
+  {
+    this.pause = pause;
   }
   
   

@@ -48,7 +48,7 @@ public class FrameMain extends JFrame
 
     // Frame
     setSize(FRAMEBREITE, FRAMEHOEHE);
-    setTitle("JaR V2 - BETA 2.0");
+    setTitle("JaR - BETA 1.1");
     setResizable(false);
     setLocationRelativeTo(null);
     setVisible(true);
@@ -94,6 +94,8 @@ public class FrameMain extends JFrame
         if(StateManager.getState().equals(handler.getStateGame()))
         {
           handler.getPlayer().keyReleased(e);
+          handler.getPanelGame().keyReleased(e);
+          
             }
         if(StateManager.getState().equals(handler.getStateEditor()))
         {
@@ -109,6 +111,7 @@ public class FrameMain extends JFrame
         if(StateManager.getState().equals(handler.getStateGame()))
         {
         handler.getPlayer().keyPressed(e);
+        handler.getPanelGame().keyPressed(e);
         }
         if(StateManager.getState().equals(handler.getStateEditor()))
         {

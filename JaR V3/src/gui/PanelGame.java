@@ -9,6 +9,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,12 +18,15 @@ import game.Kamera;
 import game.Level;
 import game.LevelCreator;
 import resManager.Assets;
+import states.StateGame;
 import states.StateManager;
 
 public class PanelGame extends JPanel
 {
   private Handler handler;
   private Level level;
+  private JDialog pauseDialog;
+  
 
 
   private boolean levelErstellt = false;
@@ -33,6 +37,8 @@ public class PanelGame extends JPanel
     setSize(FrameMain.FRAMEBREITE, FrameMain.FRAMEHOEHE);
     setLayout(null);
     setVisible(false);
+    
+    pauseDialog = new DialogPause(handler);
 
     Assets assets = new Assets();
     assets.init();
@@ -79,6 +85,23 @@ public class PanelGame extends JPanel
   public void setLevelErstellt(boolean levelErstellt)
   {
     this.levelErstellt = levelErstellt;
+  }
+  
+  public void keyReleased(KeyEvent e)
+  {
+    
+  }
+  
+  public void keyPressed(KeyEvent e)
+  {
+    if( e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_P)
+    {
+      pauseDialog.setVisible(true);
+     
+      StateGame  stg = (StateGame) handler.getStateGame();
+      stg.setPause(true);
+      
+    }
   }
 
 
