@@ -1,27 +1,35 @@
 package resManager;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.Writer;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 import game.Handler;
 import gui.FrameEditorConfig;
+import gui.FrameMain;
 
 
 
 public class LevelFileWriter
 {
 
-  static String speicherPfad;
+ private static String speicherPfad;
+
   
   public LevelFileWriter()
   {
    
   }
 
-  public static void speichern(Handler handler,  FrameEditorConfig frameConfig)
+  public static void speichern(Handler handler,  FrameEditorConfig frameConfig) throws IOException
   {
     JFileChooser fileChooser = new JFileChooser();
     
@@ -34,17 +42,39 @@ public class LevelFileWriter
     {
          // Ausgabe der ausgewaehlten Datei
       speicherPfad = fileChooser.getSelectedFile().getPath();
-      writeFile(handler, frameConfig);
+      System.out.println(speicherPfad);
+      writeFileWithStaticPath(handler, frameConfig);
     }
   }
-  public static void writeFile(Handler handler, FrameEditorConfig frameConfig)
+  
+  public static File writeTempFile(Handler handler, FrameEditorConfig frameConfig) throws IOException
+  {
+   File temp = File.createTempFile("levelTemp", ".txt");
+   BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(temp));
+   
+   writeFile(handler, frameConfig, bufferedWriter);
+   
+  
+   
+   return temp;
+
+  }
+  
+  public static void writeFileWithStaticPath(Handler handler, FrameEditorConfig frameConfig) throws IOException
+  {
+    FileWriter writer = new FileWriter(speicherPfad + ".txt", false);
+    BufferedWriter bufferedWriter = new BufferedWriter(writer);
+    
+    writeFile(handler, frameConfig, bufferedWriter);
+    
+  }
+  public static void writeFile(Handler handler, FrameEditorConfig frameConfig, BufferedWriter bufferedWriter)
   {
    
     int i, j;
     try
     {
-      FileWriter writer = new FileWriter(speicherPfad + ".txt", false);
-      BufferedWriter bufferedWriter = new BufferedWriter(writer);
+     
 
       bufferedWriter.write("LEVEL");
       bufferedWriter.newLine();
@@ -72,5 +102,17 @@ public class LevelFileWriter
     }
 
   }
+
+  public static String getSpeicherPfad()
+  {
+    return speicherPfad;
+  }
+
+  public static void setSpeicherPfad(String speicherPfad)
+  {
+    LevelFileWriter.speicherPfad = speicherPfad;
+  }
+
+ 
 
 }

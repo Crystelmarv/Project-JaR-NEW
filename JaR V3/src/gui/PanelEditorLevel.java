@@ -5,6 +5,8 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -44,6 +46,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
   private JMenuItem menuItemOeffnen;
   private JMenuItem menuItemConfig;
   private JMenuItem menuItemHauptMenue;
+  private JMenuItem menuItemLevelTesten;
 
   // TastaturEingabe
   private boolean left = false;
@@ -61,7 +64,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
   private boolean shiftHelpAktiv = false;
   private boolean zweiterButtonGedrueckt = false;
 
-  //Frame Config
+  // Frame Config
   private FrameEditorConfig frameConfig;
   private boolean focus = true;
 
@@ -108,10 +111,12 @@ public class PanelEditorLevel extends JPanel implements ActionListener
     menuItemOeffnen = new JMenuItem("Öffnen");
     menuItemConfig = new JMenuItem("Congig");
     menuItemHauptMenue = new JMenuItem("zurück zum Hauptmenü");
+    menuItemLevelTesten = new JMenuItem("Level testen");
 
     menuOptionen.add(menuItemSpeichern);
     menuOptionen.add(menuItemOeffnen);
     menuOptionen.add(menuItemConfig);
+    menuOptionen.add(menuItemLevelTesten);
     menuOptionen.add(menuItemHauptMenue);
 
     menuBar.add(menuOptionen);
@@ -120,6 +125,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
     menuItemOeffnen.addActionListener(this);
     menuItemConfig.addActionListener(this);
     menuItemHauptMenue.addActionListener(this);
+    menuItemLevelTesten.addActionListener(this);
 
     handler.getFrameMain().add(menuBar);
     handler.getFrameMain().setJMenuBar(menuBar);
@@ -151,11 +157,10 @@ public class PanelEditorLevel extends JPanel implements ActionListener
 
   public void update()
   {
-    if(focus == true)
+    if (focus == true)
     {
       handler.getFrameMain().requestFocus();
     }
-  
 
     shiftHelp();
 
@@ -249,7 +254,14 @@ public class PanelEditorLevel extends JPanel implements ActionListener
 
     if (menuItemSpeichern.equals(b.getSource()))
     {
-      LevelFileWriter.speichern(handler, frameConfig);
+      try
+      {
+        LevelFileWriter.speichern(handler, frameConfig);
+      } catch (IOException e)
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     } else if (menuItemOeffnen.equals(b.getSource()))
     {
       try
@@ -266,6 +278,16 @@ public class PanelEditorLevel extends JPanel implements ActionListener
       focus = false;
       frameConfig.setVisible(true);
 
+    } else if (menuItemLevelTesten.equals(b.getSource()))
+    {
+      try
+      {
+        levelTesten();
+      } catch (IOException e)
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     } else if (menuItemHauptMenue.equals(b.getSource()))
     {
       panelViewport.setVisible(false);
@@ -273,7 +295,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
       frameBlockAuswahl.setVisible(false);
       StateManager.setState(handler.getStateHauptMenue());
       StateManager.getState().stateUpdate();
-   
+
     } else
 
     {
@@ -391,6 +413,36 @@ public class PanelEditorLevel extends JPanel implements ActionListener
       zweiterButtonGedrueckt = false;
 
     }
+  }
+
+  private void levelTesten() throws IOException
+  {
+    File temp = LevelFileWriter.writeTempFile(handler, frameConfig);
+
+    LevelFileReader.setLevelPfad(temp.getAbsolutePath());
+
+    handler.getPanelGame().setLevelEditorTest(true);
+
+    panelViewport.setVisible(false);
+    handler.getFrameMain().setJMenuBar(null);
+    frameBlockAuswahl.setVisible(false);
+
+    StateManager.setState(handler.getStateGame());
+    handler.getStateGame().stateUpdate();
+
+  }
+
+  public void levelTestenLaden() throws IOException
+  {
+    handler.getPanelGame().setVisible(false);
+    handler.getFrameMain().repaint();
+    StateManager.setState(handler.getStateEditor());
+    StateManager.getState().stateUpdate();
+
+    
+    LevelFileReader.levelLesenEditor(handler);
+    LevelFileReader.levelNameLaden(frameConfig);
+
   }
 
   public String getBlockIds(int i, int j)

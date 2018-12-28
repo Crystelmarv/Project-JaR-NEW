@@ -18,6 +18,7 @@ import game.Kamera;
 import game.Level;
 import game.LevelCreator;
 import resManager.Assets;
+import resManager.Timer;
 import states.StateGame;
 import states.StateManager;
 
@@ -26,6 +27,10 @@ public class PanelGame extends JPanel
   private Handler handler;
   private Level level;
   private JDialog pauseDialog;
+  private JDialog pauseDialogEditor;
+  
+  private boolean levelEditorTest = false;
+
   
 
 
@@ -39,6 +44,7 @@ public class PanelGame extends JPanel
     setVisible(false);
     
     pauseDialog = new DialogPause(handler);
+    pauseDialogEditor = new DialogPauseEditor(handler);
 
     Assets assets = new Assets();
     assets.init();
@@ -96,12 +102,33 @@ public class PanelGame extends JPanel
   {
     if( e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_P)
     {
-      pauseDialog.setVisible(true);
+      Timer.setTimeVorPause(System.nanoTime());
+      
      
       StateGame  stg = (StateGame) handler.getStateGame();
       stg.setPause(true);
       
+      if(levelEditorTest == true)
+      {
+        pauseDialogEditor.setVisible(true);
+      }
+      else
+      {
+        pauseDialog.setVisible(true);
+      }
+    
+      
     }
+  }
+
+  public boolean isLevelEditorTest()
+  {
+    return levelEditorTest;
+  }
+
+  public void setLevelEditorTest(boolean levelEditorTest)
+  {
+    this.levelEditorTest = levelEditorTest;
   }
 
 

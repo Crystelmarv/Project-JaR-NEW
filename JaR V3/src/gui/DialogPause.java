@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 
 import game.Handler;
+import resManager.Timer;
 import states.StateGame;
+import states.StateManager;
 
 public class DialogPause extends JDialog implements ActionListener
 {
@@ -42,13 +44,19 @@ public class DialogPause extends JDialog implements ActionListener
     add(optionen);
     add(levelNeustart);
     add(levelSelect);
-    
+
     fortsezen.addActionListener(this);
+    optionen.addActionListener(this);
+    levelNeustart.addActionListener(this);
+    levelSelect.addActionListener(this);
+    
 
   }
 
   private void unpause()
   {
+    Timer.setTimeNachPause(System.nanoTime());
+    Timer.setPauseTime();
     StateGame stg = (StateGame) handler.getStateGame();
     stg.setPause(false);
     setVisible(false);
@@ -58,8 +66,26 @@ public class DialogPause extends JDialog implements ActionListener
   @Override
   public void actionPerformed(ActionEvent e)
   {
-    unpause();
-
+    if (e.getSource().equals(fortsezen))
+    {
+      unpause();
+    } else if (e.getSource().equals(optionen))
+    {
+      
+    } else if (e.getSource().equals(levelNeustart))
+    {
+      setVisible(false);
+      unpause();
+      handler.getPanelGame().setVisible(false);
+      StateManager.getState().stateUpdate();
+    } else if (e.getSource().equals(levelSelect))
+    {
+      setVisible(false);
+      unpause();
+      handler.getPanelGame().setVisible(false);
+      handler.getFrameMain().repaint();
+      StateManager.setState(handler.getStateLevelSelect());
+      StateManager.getState().stateUpdate();
+    }
   }
-
 }

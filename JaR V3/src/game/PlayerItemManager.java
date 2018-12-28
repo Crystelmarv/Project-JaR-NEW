@@ -4,6 +4,7 @@ import items.Item;
 import items.ItemFeuer;
 import items.ItemFeuerKugel;
 import items.ItemGeschwindigkeit;
+import resManager.Timer;
 
 public class PlayerItemManager
 {
@@ -28,7 +29,7 @@ public class PlayerItemManager
   
   public void item()
   {
-    double timeNow = System.nanoTime() / 1000000;
+   
     if (handler.getPlayer().isInteraction() == true)
     {
       if(aktivesItem == "geschwindigkeit")
@@ -38,7 +39,7 @@ public class PlayerItemManager
       
       else if (timerGesetztItem == false)
       {
-        anfangsTimeItem = System.nanoTime() / 1000000;
+        anfangsTimeItem = Timer.getTime() ;
         timerGesetztItem = true;
 
         switch (aktivesItem)
@@ -59,7 +60,7 @@ public class PlayerItemManager
       } else
       {
 
-        if (timeNow - anfangsTimeItem > 500)
+        if (Timer.getTime() - anfangsTimeItem > 500000000)
         {
           timerGesetztItem = false;
 

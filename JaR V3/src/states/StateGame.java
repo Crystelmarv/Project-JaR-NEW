@@ -11,6 +11,7 @@ import game.Handler;
 import gui.DialogPause;
 import gui.PanelGame;
 import gui.PanelLevelSelect;
+import resManager.Timer;
 
 public class StateGame extends State
 {
@@ -19,7 +20,7 @@ public class StateGame extends State
   private int aktuelesLevel;
   
   private boolean pause = false;
-
+ 
   public StateGame(Handler handler) throws IOException
   {
     super(handler);
@@ -34,6 +35,7 @@ public class StateGame extends State
   {
     if(pause == false)
     {
+    
       panelGame.update();
     }
     
@@ -73,6 +75,8 @@ public class StateGame extends State
   {
     this.pause = pause;
   }
+
+  
   
   
 

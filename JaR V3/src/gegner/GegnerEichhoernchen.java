@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Handler;
+import resManager.Timer;
 
 public class GegnerEichhoernchen extends Gegner
 {
@@ -14,7 +15,7 @@ public class GegnerEichhoernchen extends Gegner
   {
     super(xp, yp, blockID, handler);
     
-    timeStart = System.nanoTime();
+    timeStart = Timer.getTime();
   }
 
   @Override
@@ -59,15 +60,14 @@ public class GegnerEichhoernchen extends Gegner
   
   private void schiessen()
   {
-    
-    double timeNow = System.nanoTime();
-    if (timeNow - timeStart > 1900000000)
+    if (Timer.getTime() - timeStart > 1900000000)
     {
+    
       Gegner geg = new GegnerEichhoernchenNuss(x, y, 0, handler, blickRichtungRechts);
       
       handler.getLevel().setEntity(geg);
       
-      timeStart = timeNow;
+      timeStart = Timer.getTime();
     }
    
   }

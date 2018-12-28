@@ -21,7 +21,7 @@ public class StateLevelSelect extends State
   public void update()
   {
  
-  
+  System.out.println("§");
     
   }
 

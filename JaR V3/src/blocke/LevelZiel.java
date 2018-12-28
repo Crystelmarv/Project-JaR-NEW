@@ -2,6 +2,7 @@ package blocke;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.IOException;
 
 import game.Entity;
 import game.Handler;
@@ -22,29 +23,41 @@ public class LevelZiel extends Entity
   public void paint(Graphics g)
   {
     g.drawImage(Assets.ziel, x, y, null);
-    
+
   }
-  
+
   public void update()
   {
-    if(ziel() == true)
+    if (ziel() == true)
     {
-      
       handler.getPanelGame().setVisible(false);
       handler.getFrameMain().repaint();
-      StateManager.setState(handler.getStateLevelSelect());
-      StateManager.getState().stateUpdate();
+      if (handler.getPanelGame().isLevelEditorTest() == false)
+      {
+        StateManager.setState(handler.getStateLevelSelect());
+        StateManager.getState().stateUpdate();
+      } else
+      {
+        try
+        {
+          handler.getPanelLevelEditor().levelTestenLaden();
+        } catch (IOException e)
+        {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+      }
+
     }
   }
-  
+
   public boolean ziel()
   {
     if (handler.getPlayer().getBounds().intersects(getBounds()) == true)
     {
-     return true;
+      return true;
     }
     return false;
   }
-  
- 
+
 }

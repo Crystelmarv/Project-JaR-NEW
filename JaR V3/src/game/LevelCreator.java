@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.io.IOException;
 
 import blocke.Block;
+import blocke.BlockBaumStamm;
 import blocke.BlockItem;
 import blocke.BlockSchild;
 import blocke.BlockTrampolin;
@@ -32,7 +33,7 @@ public class LevelCreator
   public LevelCreator(Handler handler) throws IOException
   {
     this.handler = handler;
-    setGroesseLevel(LevelFileReader.arrayGroesseY(), LevelFileReader.arrayGroesseX());
+    setGroesseLevel(LevelFileReader.arrayGroesseY(handler), LevelFileReader.arrayGroesseX(handler));
   }
 
   public void levelErstellen()
@@ -120,6 +121,11 @@ public class LevelCreator
           //Trampolin
         case 35:
           levelObjects[iy][ix] = new BlockTrampolin(x, y, levelID[iy][ix], handler);
+         break;
+         
+         //BaumStamm
+        case 36:
+          levelObjects[iy][ix] = new BlockBaumStamm(x, y, levelID[iy][ix], handler);
          break;
 
         default:

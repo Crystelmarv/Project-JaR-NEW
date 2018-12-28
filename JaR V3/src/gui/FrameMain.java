@@ -95,6 +95,7 @@ public class FrameMain extends JFrame
         {
           handler.getPlayer().keyReleased(e);
           handler.getPanelGame().keyReleased(e);
+   
           
             }
         if(StateManager.getState().equals(handler.getStateEditor()))
@@ -112,6 +113,7 @@ public class FrameMain extends JFrame
         {
         handler.getPlayer().keyPressed(e);
         handler.getPanelGame().keyPressed(e);
+     
         }
         if(StateManager.getState().equals(handler.getStateEditor()))
         {

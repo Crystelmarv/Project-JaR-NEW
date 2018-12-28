@@ -3,6 +3,7 @@ package resManager;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -41,11 +42,11 @@ public class LevelFileReader
 
   }
 
-  public static void levelDateiLesen() throws IOException
+  public static void levelDateiLesen(Handler handler) throws IOException
   {
 
  
-    levelRead();
+    levelRead(handler);
 
   }
 
@@ -58,11 +59,24 @@ public class LevelFileReader
    
   }
   
+  public static void readerErstellenWithStaticPath() throws FileNotFoundException
+  {
+    FileReader fileR = new FileReader(levelPfad);
+    bufferedReader = new BufferedReader(fileR);
+  }
+  
   
 
-  public static void levelRead() throws IOException
+  public static void levelRead(Handler handler) throws IOException
   {
-    readerErstellen();
+    if(handler.getPanelGame().isLevelEditorTest()== true)
+    {
+      readerErstellenWithStaticPath();
+    }
+    else
+    {
+      readerErstellen();
+    }
     String currentLine;
     int i;
     int y = 0;
@@ -86,9 +100,17 @@ public class LevelFileReader
     }
   }
 
-  public static int arrayGroesseX() throws IOException
+  public static int arrayGroesseX(Handler handler) throws IOException
   {
-    readerErstellen();
+    if(handler.getPanelGame().isLevelEditorTest()== true)
+    {
+      readerErstellenWithStaticPath();
+    }
+    else
+    {
+      readerErstellen();
+    }
+ 
     String currentLine;
 
     do
@@ -100,9 +122,16 @@ public class LevelFileReader
     return values.length;
   }
 
-  public static int arrayGroesseY() throws IOException
+  public static int arrayGroesseY(Handler handler) throws IOException
   {
-    readerErstellen();
+    if(handler.getPanelGame().isLevelEditorTest()== true)
+    {
+      readerErstellenWithStaticPath();
+    }
+    else
+    {
+      readerErstellen();
+    }
     String currentLine;
     int i = 0;
 

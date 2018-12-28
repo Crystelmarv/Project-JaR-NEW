@@ -29,7 +29,7 @@ public class Level
     handler.setLevel(this);
   
     levelCreator = new LevelCreator(handler);
-    LevelFileReader.levelDateiLesen();
+    LevelFileReader.levelDateiLesen(handler);
     levelCreator.levelErstellen();
     anzeigeApfel = new AnzeigeApfel(handler);
     anzeigeAktuellesItem = new AnzeigeAktuellesItem(handler);

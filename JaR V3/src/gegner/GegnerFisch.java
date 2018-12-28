@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import game.Handler;
 import game.LevelCreator;
 import resManager.Assets;
+import resManager.Timer;
 
 public class GegnerFisch extends Gegner
 {
@@ -22,7 +23,7 @@ public class GegnerFisch extends Gegner
     xSpawn = x;
     ySpawn = y;
     yWasser = y;
-    timeStart = System.nanoTime();
+    timeStart = Timer.getTime();
 
     HITBOX_BREITE = 45;
     HITBOX_X = x + 10;
@@ -87,8 +88,7 @@ public class GegnerFisch extends Gegner
 
   private void sprung()
   {
-    double timeNow = System.nanoTime();
-    if (timeNow - timeStart > 1500000000 && fall == false)
+    if (Timer.getTime() - timeStart > 1500000000 && fall == false)
     {
       y = y - 4;
       sprung = true;
@@ -103,7 +103,7 @@ public class GegnerFisch extends Gegner
 
       if (y >= ySpawn && sprung == false)
       {
-        timeStart = timeNow;
+        timeStart = Timer.getTime();
         fall = false;
       }
     }

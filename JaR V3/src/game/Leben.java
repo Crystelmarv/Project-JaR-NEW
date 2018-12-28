@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.Graphics;
+import java.io.IOException;
 
 import resManager.Assets;
 import states.StateManager;
@@ -52,8 +53,28 @@ public class Leben
     {
       handler.getPanelGame().setVisible(false);
       handler.getFrameMain().repaint();
-      StateManager.setState(handler.getStateLevelSelect());
-      StateManager.getState().stateUpdate();
+      if(handler.getPanelGame().isLevelEditorTest() == false)
+      {
+        
+        StateManager.setState(handler.getStateLevelSelect());
+        StateManager.getState().stateUpdate();
+      }
+      else
+      {
+        
+  
+          try
+          {
+            handler.getPanelLevelEditor().levelTestenLaden();
+            
+          } catch (IOException e)
+          {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        System.out.println("0008784000");
+      }
+   
     }
   }
   

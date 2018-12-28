@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import game.Handler;
 import gui.FrameMain;
 import resManager.Assets;
+import resManager.Timer;
 
 public class GegnerBiene extends Gegner
 {
@@ -31,7 +32,7 @@ public class GegnerBiene extends Gegner
     HITBOX_HOEHE = 45;
     HITBOX_Y = y +18;
     
-    timeStart = System.nanoTime();
+    timeStart = Timer.getTime();
   }
 
   @Override
@@ -87,14 +88,14 @@ public class GegnerBiene extends Gegner
   
   public void stachel()
   {
-   double timeNow = System.nanoTime();
+ 
 
-    if (timeNow - timeStart > 1500000000) //4000000)
+    if (Timer.getTime() - timeStart > 1500000000) //4000000)
     {
       GegnerBieneStachel stachl = new GegnerBieneStachel(x, y, blockID, handler, right);
       handler.getLevel().setEntity(stachl);
      
-     timeStart = timeNow;
+     timeStart = Timer.getTime();
     }
   }
 
