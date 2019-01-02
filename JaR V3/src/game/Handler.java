@@ -3,6 +3,7 @@ package game;
 import gui.FrameMain;
 import gui.PanelEditorLevel;
 import gui.PanelGame;
+import gui.PanelOptionen;
 import states.State;
 
 public class Handler
@@ -22,6 +23,7 @@ public class Handler
   private Leben leben;
   private PlayerItemManager itemManager;
   private PanelEditorLevel panelLevelEditor;
+  private PanelOptionen panelOptionne;
   
   public Handler(FrameMain frameMain)
   {
@@ -182,6 +184,16 @@ public class Handler
   public void setPanelLevelEditor(PanelEditorLevel panelLevelEditor)
   {
     this.panelLevelEditor = panelLevelEditor;
+  }
+
+  public PanelOptionen getPanelOptionne()
+  {
+    return panelOptionne;
+  }
+
+  public void setPanelOptionne(PanelOptionen panelOptionne)
+  {
+    this.panelOptionne = panelOptionne;
   }
 
   

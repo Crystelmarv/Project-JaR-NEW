@@ -4,6 +4,7 @@ import items.Item;
 import items.ItemFeuer;
 import items.ItemFeuerKugel;
 import items.ItemGeschwindigkeit;
+import resManager.Tastatur;
 import resManager.Timer;
 
 public class PlayerItemManager
@@ -30,7 +31,7 @@ public class PlayerItemManager
   public void item()
   {
    
-    if (handler.getPlayer().isInteraction() == true)
+    if (Tastatur.isUseItem() == true)
     {
       if(aktivesItem == "geschwindigkeit")
       {

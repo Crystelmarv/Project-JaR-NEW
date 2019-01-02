@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import gui.FrameMain;
 import items.Item;
 import items.ItemFeuerKugel;
+import resManager.Tastatur;
 
 public class Player
 {
@@ -25,16 +26,16 @@ public class Player
   private Handler handler;
 
   // Movement
+  
   private boolean jump = false;
   private boolean fall = false;
-  private boolean right = false;
-  private boolean left = false;
+
   
   private boolean lastPositionRight = false;
 
 
   private final float DEFAULT_SPEED = 4.75f; 
-  private float speed = DEFAULT_SPEED;
+  private float speed = 10f; //DEFAULT_SPEED;
   private float gravity = 0.22f;
   private float maxFallingSpeed = 5.5f;
   private float jumpStart = -8.7f;
@@ -91,12 +92,22 @@ public class Player
   }
   public void update()
   {
+    jumpUpdate();
     calculateMovement();
     calculateCollision();
     move();
     itemManager.update();
     nichtAngreifbar();
 
+  }
+  
+  private void jumpUpdate()
+  {
+    if(fall == false && Tastatur.isMoveUp() == true)
+    {
+      
+      jump = true;
+    }
   }
 
   public void paint(Graphics2D g2d)
@@ -112,7 +123,7 @@ public class Player
     }
     g2d.fillRect(x, y, BREITE, HOEHE);
   }
-
+/*
   public void keyPressed(KeyEvent e)
   {
     int key = e.getKeyCode();
@@ -187,7 +198,7 @@ public class Player
   {
 
   }
-
+*/
   private void calculateCollision()
   {
     float toX = x + dx;
@@ -321,12 +332,14 @@ public class Player
   }
   private void calculateMovement()
   {
-    if (left == true)
+    if (Tastatur.isMoveLeft() == true)
     {
+      lastPositionRight = false;
       dx = -speed;
     }
-    if (right == true)
+    if (Tastatur.isMoveRight() == true)
     {
+      lastPositionRight = true;
       dx = speed;
     }
 
@@ -436,15 +449,11 @@ public class Player
   {
     return new Rectangle(x, y, BREITE, HOEHE);
   }
-  public boolean isJump()
-  {
-    return jump;
-  }
+ 
   public void setJump()
   {
     fall = false;
     jump = true;
-    
   }
   public boolean isFall()
   {
@@ -473,6 +482,6 @@ public class Player
   }
  
   
-  
+ 
 
 }

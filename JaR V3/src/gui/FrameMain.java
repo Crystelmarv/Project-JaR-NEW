@@ -6,10 +6,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.undo.StateEdit;
 
 import game.Handler;
+import resManager.Tastatur;
 import states.State;
 import states.StateEditor;
 import states.StateGame;
@@ -21,6 +23,7 @@ import states.StatePause;
 
 public class FrameMain extends JFrame
 {
+ 
   // Frame
   final static int FRAMEHOEHE = 900;
   final static int FRAMEBREITE = 1450;
@@ -75,6 +78,10 @@ public class FrameMain extends JFrame
     handler.setStateOptionen(stateOptionen);
     handler.setStatePause(statePause);
 
+    Tastatur.standartKeyBinding(handler.getPanelGame());
+    Tastatur.standartKeyBinding(handler.getPanelLevelEditor());
+ 
+    
     StateManager.setState(stateHauptMenue);
     StateManager.getState().stateUpdate();
 
@@ -93,14 +100,14 @@ public class FrameMain extends JFrame
       {
         if(StateManager.getState().equals(handler.getStateGame()))
         {
-          handler.getPlayer().keyReleased(e);
-          handler.getPanelGame().keyReleased(e);
+         // handler.getPlayer().keyReleased(e);
+       //   handler.getPanelGame().keyReleased(e);
    
           
             }
         if(StateManager.getState().equals(handler.getStateEditor()))
         {
-          handler.getPanelLevelEditor().keyReleased(e);
+       //   handler.getPanelLevelEditor().keyReleased(e);
         }
         
 
@@ -111,13 +118,13 @@ public class FrameMain extends JFrame
       {
         if(StateManager.getState().equals(handler.getStateGame()))
         {
-        handler.getPlayer().keyPressed(e);
-        handler.getPanelGame().keyPressed(e);
+       // handler.getPlayer().keyPressed(e);
+       // handler.getPanelGame().keyPressed(e);
      
         }
         if(StateManager.getState().equals(handler.getStateEditor()))
         {
-        handler.getPanelLevelEditor().keyPressed(e);
+     //   handler.getPanelLevelEditor().keyPressed(e);
         }
       }
     });
@@ -168,5 +175,6 @@ public class FrameMain extends JFrame
       }
     }
   }
+ 
 
 }

@@ -21,6 +21,12 @@ public class LevelFileReader
   // level
   private static String levelPfad = "/level/1.Level.txt";
 
+  // Umrahmung des Levels
+  private static Integer anfangX;
+
+  private static Integer endeX;
+  private static int levelIDTemp[][];
+
   // FilePartTrenner
   private static String trennerName = "NAME";
   private static String trennerLevel = "LEVEL";
@@ -29,12 +35,12 @@ public class LevelFileReader
   // Reader
   static InputStream inputStream;
   static BufferedReader bufferedReader;
-  
-  //Editor Reader
+
+  // Editor Reader
   static InputStream eInputStream;
   static BufferedReader eBufferedReader;
-  
-  //Editor
+
+  // Editor
   private static String levelName;
 
   public LevelFileReader()
@@ -45,35 +51,93 @@ public class LevelFileReader
   public static void levelDateiLesen(Handler handler) throws IOException
   {
 
- 
     levelRead(handler);
+
+  }
+
+  public static void tempArrayEinlesen(Handler handler) throws IOException
+  {
+    int y = 0;
+    boolean ziel;
+
+  
+
+    for (int j = 0; j < 2; j++)
+    {
+      System.out.println("1");
+      ziel = false;
+
+      for (int ix = 0; ix < levelIDTemp[0].length; ix++)
+      {
+        for (int iy = 0; iy < levelIDTemp.length; iy++)
+        {
+          System.out.println(levelIDTemp[iy][ix]);
+          if (levelIDTemp[iy][ix] == 16)
+          {
+            ziel = true;
+            System.out.println("ZIEL");
+          }
+        }
+        while (levelIDTemp[y][ix] == 20 && y < levelIDTemp.length-1)
+        {
+          System.out.println(y);
+          if (levelIDTemp.length == y)
+          {
+            if (ziel == false)
+            {
+              anfangX = ix + 1;
+            } else
+            {
+              endeX = ix - 1;
+            }
+
+          }
+
+          y++;
+        }
+      }
+    }
+  
+
+    if (anfangX == null && endeX == null)
+    {
+      anfangX = 0;
+      endeX = levelIDTemp[0].length;
+    } else if (anfangX != null && endeX == null)
+    {
+      endeX = levelIDTemp[0].length;
+    } else if (anfangX == null && endeX != null)
+    {
+      anfangX = 0;
+    }
+    
+    System.out.println("ANFANG " + anfangX);
+    System.out.println("ENDEE " + endeX);
+ 
 
   }
 
   public static void readerErstellen() throws IOException
   {
-   
+
     inputStream = FrameMain.class.getResourceAsStream(levelPfad);
     bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-   
   }
-  
+
   public static void readerErstellenWithStaticPath() throws FileNotFoundException
   {
     FileReader fileR = new FileReader(levelPfad);
     bufferedReader = new BufferedReader(fileR);
   }
-  
-  
 
   public static void levelRead(Handler handler) throws IOException
   {
-    if(handler.getPanelGame().isLevelEditorTest()== true)
+    levelIDTemp = new int[arrayGroesseY(handler)][arrayGroesseX(handler)];
+    if (handler.getPanelGame().isLevelEditorTest() == true)
     {
       readerErstellenWithStaticPath();
-    }
-    else
+    } else
     {
       readerErstellen();
     }
@@ -95,6 +159,8 @@ public class LevelFileReader
       for (i = 0; i < zeile.length; i++)
       {
         LevelCreator.levelID[y][i] = Integer.parseInt(zeile[i]);
+       
+        levelIDTemp[y][i] = Integer.parseInt(zeile[i]);
       }
       y++;
     }
@@ -102,15 +168,14 @@ public class LevelFileReader
 
   public static int arrayGroesseX(Handler handler) throws IOException
   {
-    if(handler.getPanelGame().isLevelEditorTest()== true)
+    if (handler.getPanelGame().isLevelEditorTest() == true)
     {
       readerErstellenWithStaticPath();
-    }
-    else
+    } else
     {
       readerErstellen();
     }
- 
+
     String currentLine;
 
     do
@@ -124,11 +189,10 @@ public class LevelFileReader
 
   public static int arrayGroesseY(Handler handler) throws IOException
   {
-    if(handler.getPanelGame().isLevelEditorTest()== true)
+    if (handler.getPanelGame().isLevelEditorTest() == true)
     {
       readerErstellenWithStaticPath();
-    }
-    else
+    } else
     {
       readerErstellen();
     }
@@ -147,38 +211,38 @@ public class LevelFileReader
     }
     return i;
   }
-  
-  //EDITOR////////////
-  
+
+  // EDITOR////////////
+
   public static void editorReaderErstellen() throws FileNotFoundException
   {
     eInputStream = new FileInputStream(levelPfad);
-    eBufferedReader  = new BufferedReader(new InputStreamReader(eInputStream));
+    eBufferedReader = new BufferedReader(new InputStreamReader(eInputStream));
   }
-  
+
   public static void levelOeffnenEditor(Handler handler, FrameEditorConfig frameConfig) throws IOException
   {
- JFileChooser fileChooser = new JFileChooser();
-    
+    JFileChooser fileChooser = new JFileChooser();
+
     fileChooser.setDialogType(JFileChooser.OPEN_DIALOG);
-  
+
     int rueckgabeWert = fileChooser.showOpenDialog(null);
-    
-    //wurde speichern gedrückt?
-    if(rueckgabeWert == JFileChooser.APPROVE_OPTION)
+
+    // wurde speichern gedrückt?
+    if (rueckgabeWert == JFileChooser.APPROVE_OPTION)
     {
-         // Ausgabe der ausgewaehlten Datei
+      // Ausgabe der ausgewaehlten Datei
       levelPfad = fileChooser.getSelectedFile().getPath();
-;
+      ;
     }
     levelLesenEditor(handler);
     levelNameLaden(frameConfig);
   }
-  
+
   public static void levelLesenEditor(Handler handler) throws IOException
   {
     editorReaderErstellen();
-    
+
     String currentLine;
     int i;
     int y = 0;
@@ -202,32 +266,29 @@ public class LevelFileReader
     }
     handler.getPanelLevelEditor().oeffnenButtonsUpdate();
   }
-  
+
   public static void levelNameLaden(FrameEditorConfig frameConfig) throws IOException
   {
-editorReaderErstellen();
+    editorReaderErstellen();
     String currentLine;
-   
+
     do
     {
       currentLine = eBufferedReader.readLine();
-      System.out.println(currentLine);
-    
+
     } while (!currentLine.regionMatches(0, trennerName, 0, trennerName.length()));
-    
+
     levelName = eBufferedReader.readLine();
-   
+
     frameConfig.setTextFieldLevelName(levelName);
-    
+
     frameConfig.setLevelName(levelName);
-    
+
   }
-  
+
   public static void setLevelPfad(String levelP)
   {
     levelPfad = levelP;
   }
-
-  
 
 }

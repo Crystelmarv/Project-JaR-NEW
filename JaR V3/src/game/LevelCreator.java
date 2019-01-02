@@ -29,11 +29,14 @@ public class LevelCreator
 
   // Player Spawn Koordinaten
   private int playerSpawnY, playerSpawnX;
+  
+ 
 
   public LevelCreator(Handler handler) throws IOException
   {
     this.handler = handler;
     setGroesseLevel(LevelFileReader.arrayGroesseY(handler), LevelFileReader.arrayGroesseX(handler));
+   
   }
 
   public void levelErstellen()
@@ -136,7 +139,14 @@ public class LevelCreator
       x = 0;
       y = y + FrameMain.BLOCKHOEHE;
     }
+    
+    rahmenKontrolle();
 
+  }
+  
+  private void rahmenKontrolle()
+  {
+    
   }
 
   public int getPlayerSpawnY()

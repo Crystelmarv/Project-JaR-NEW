@@ -18,6 +18,7 @@ import game.Kamera;
 import game.Level;
 import game.LevelCreator;
 import resManager.Assets;
+import resManager.Tastatur;
 import resManager.Timer;
 import states.StateGame;
 import states.StateManager;
@@ -68,6 +69,7 @@ public class PanelGame extends JPanel
     if (StateManager.getState().equals(handler.getStateGame()) && levelErstellt == true)
     {
       level.update();
+      isPause();
    
     }
 
@@ -98,16 +100,18 @@ public class PanelGame extends JPanel
     
   }
   
-  public void keyPressed(KeyEvent e)
+  private void isPause()
   {
-    if( e.getKeyCode() == KeyEvent.VK_ESCAPE || e.getKeyCode() == KeyEvent.VK_P)
+    
+    if(Tastatur.isPause() == true)
     {
       Timer.setTimeVorPause(System.nanoTime());
       
-     
+      
       StateGame  stg = (StateGame) handler.getStateGame();
       stg.setPause(true);
       
+      Tastatur.setPause(false);
       if(levelEditorTest == true)
       {
         pauseDialogEditor.setVisible(true);
@@ -117,10 +121,10 @@ public class PanelGame extends JPanel
         pauseDialog.setVisible(true);
       }
     
-      
     }
+   
   }
-
+ 
   public boolean isLevelEditorTest()
   {
     return levelEditorTest;

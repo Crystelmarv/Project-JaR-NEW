@@ -21,6 +21,7 @@ import game.Handler;
 import resManager.Assets;
 import resManager.LevelFileReader;
 import resManager.LevelFileWriter;
+import resManager.Tastatur;
 import states.StateManager;
 
 public class PanelEditorLevel extends JPanel implements ActionListener
@@ -84,6 +85,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
 
   public void PanelErstellen()
   {
+    
 
     frameBlockAuswahl = new FrameLevelEditorBlockAuswahl();
     frameConfig = new FrameEditorConfig(this);
@@ -153,33 +155,34 @@ public class PanelEditorLevel extends JPanel implements ActionListener
     // handler.getFrameMain().add(this);
     // this.setVisible(true);
     handler.getFrameMain().add(panelViewport);
+    handler.getFrameMain().requestFocus();
   }
 
   public void update()
   {
-    if (focus == true)
+    if (focus = true)
     {
       handler.getFrameMain().requestFocus();
     }
 
     shiftHelp();
 
-    if (right == true)
+    if (Tastatur.isMoveRight() == true)
     {
       x = x - 30;
     }
 
-    if (left == true)
+    if (Tastatur.isMoveLeft() == true)
     {
       x = x + 30;
     }
 
-    if (up == true)
+    if (Tastatur.isMoveUp() == true)
     {
       y = y + 30;
     }
 
-    if (down == true)
+    if (Tastatur.isMoveDown() == true)
     {
       y = y - 30;
     }
@@ -192,7 +195,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
   {
 
   }
-
+/*
   public void keyReleased(KeyEvent e)
   {
     int key = e.getKeyCode();
@@ -244,7 +247,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
     }
 
   }
-
+*/
   @Override
   public void actionPerformed(ActionEvent b)
   {
@@ -348,13 +351,13 @@ public class PanelEditorLevel extends JPanel implements ActionListener
   public void shiftHelp()
   {
     int i;
-    if (shift == true && shiftGestezt == false)
+    if (Tastatur.isShiftHelp() == true && shiftGestezt == false)
     {
       letzterButtonXTemp = letzterButtonX;
       letzterButtonYTemp = letzterButtonY;
       shiftGestezt = true;
     }
-    if (shift == false)
+    if (Tastatur.isShiftHelp() == false)
     {
       shiftHelpAktiv = true;
     }
@@ -364,7 +367,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
 
       if (letzterButtonXTemp == letzterButtonX)
       {
-        shift = false;
+        Tastatur.setShiftHelp(false);
         System.out.println("X GLEICH");
 
         if (letzterButtonYTemp > letzterButtonY)
@@ -388,7 +391,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
 
       if (letzterButtonYTemp == letzterButtonY)
       {
-        shift = false;
+        Tastatur.setShiftHelp(false);
         System.out.println("Y GLEICH");
 
         if (letzterButtonXTemp > letzterButtonX)
@@ -439,7 +442,6 @@ public class PanelEditorLevel extends JPanel implements ActionListener
     StateManager.setState(handler.getStateEditor());
     StateManager.getState().stateUpdate();
 
-    
     LevelFileReader.levelLesenEditor(handler);
     LevelFileReader.levelNameLaden(frameConfig);
 
@@ -455,13 +457,13 @@ public class PanelEditorLevel extends JPanel implements ActionListener
     ids[i][j] = id;
   }
 
-  public int getButtonLaenge1()
+  public int getButtonLaengeY()
   {
     return buttons.length;
 
   }
 
-  public int getButtonLaenge2()
+  public int getButtonLaengeX()
   {
     return buttons[0].length;
 

@@ -72,9 +72,7 @@ public class Leben
             // TODO Auto-generated catch block
             e.printStackTrace();
           }
-        System.out.println("0008784000");
       }
-   
     }
   }
   

@@ -41,6 +41,8 @@ public class StateEditor extends State
     panelEditorLevel.setVisible(true);
     panelEditorLevel.PanelErstellen();
     frameErstellt = true;
+    handler.getFrameMain().requestFocus();
+    
    
     
   }

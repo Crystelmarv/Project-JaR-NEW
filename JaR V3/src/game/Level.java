@@ -30,6 +30,7 @@ public class Level
   
     levelCreator = new LevelCreator(handler);
     LevelFileReader.levelDateiLesen(handler);
+    LevelFileReader.tempArrayEinlesen(handler);
     levelCreator.levelErstellen();
     anzeigeApfel = new AnzeigeApfel(handler);
     anzeigeAktuellesItem = new AnzeigeAktuellesItem(handler);

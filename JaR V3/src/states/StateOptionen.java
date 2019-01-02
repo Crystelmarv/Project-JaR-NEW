@@ -14,6 +14,7 @@ public class StateOptionen extends State
   {
     super(handler);
     panelOptionen = new PanelOptionen(handler);
+    handler.setPanelOptionne(panelOptionen);
     handler.getFrameMain().add(panelOptionen);
   }
 
