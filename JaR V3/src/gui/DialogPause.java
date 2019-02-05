@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 
 import game.Handler;
+import resManager.Tastatur;
 import resManager.Timer;
 import states.StateGame;
 import states.StateManager;
@@ -68,6 +69,7 @@ public class DialogPause extends JDialog implements ActionListener
   {
     if (e.getSource().equals(fortsezen))
     {
+      Tastatur.allKeysNotPressed();
       unpause();
     } else if (e.getSource().equals(optionen))
     {

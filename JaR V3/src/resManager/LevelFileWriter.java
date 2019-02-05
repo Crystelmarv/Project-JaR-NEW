@@ -3,16 +3,19 @@ package resManager;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Writer;
+import java.net.URL;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
+import game.DreiApfelWertung;
 import game.Handler;
 import gui.FrameEditorConfig;
 import gui.FrameMain;
@@ -21,15 +24,48 @@ public class LevelFileWriter
 {
 
   private static String speicherPfad;
-
+  
+  // Drei Apfel Wertung
+  private static String dreiApfelPfad = "res/saves/3ApfelWertung.txt";
+  
   private static Integer levelAnfangX, levelEndeX, levelAnfangY, levelEndeY;
 
   public LevelFileWriter()
   {
 
   }
+  
+  
+  //3 Apfel Wertung /////
+  
+  public static void wertungSpeichern() throws IOException
+  {
+    
+    FileWriter writer = new FileWriter(dreiApfelPfad);
+    BufferedWriter bufWriter = new BufferedWriter(writer);
+    
+    
+ 
+   
+   // FileWriter writer = new FileWriter(dreiApfelPfad, false);
+    //BufferedWriter bufferedWriter = new BufferedWriter(writer);
+    
+    for (int i = 0; i < DreiApfelWertung.wertung.length; i++)
+    {
+      for(int j = 0; j < DreiApfelWertung.wertung[0].length; j++)
+      {
+        bufWriter.write(String.valueOf(DreiApfelWertung.wertung[i][j]));
+        bufWriter.write(" ");
+      }
+      bufWriter.newLine();
+    }
+     bufWriter.close();
+  }
+  
+ 
 
-  public static void speichern(Handler handler, FrameEditorConfig frameConfig) throws IOException
+  //EDITOR////
+  public static boolean speichern(Handler handler, FrameEditorConfig frameConfig) throws IOException
   {
     JFileChooser fileChooser = new JFileChooser();
 
@@ -43,7 +79,9 @@ public class LevelFileWriter
       // Ausgabe der ausgewaehlten Datei
       speicherPfad = fileChooser.getSelectedFile().getPath();
       writeFileWithStaticPath(handler, frameConfig);
+      return true;
     }
+    return false;
   }
 
   public static File writeTempFile(Handler handler, FrameEditorConfig frameConfig) throws IOException
@@ -71,10 +109,10 @@ public class LevelFileWriter
 
     int i, j;
     
-    beschneider(handler);
+   
     try
     {
-
+      beschneider(handler);
       bufferedWriter.write("LEVEL");
       bufferedWriter.newLine();
 
@@ -105,6 +143,11 @@ public class LevelFileWriter
 
     // Erste Reihe Testen: Wenn min. ein normaler Block -> LevelAnfangX = 0
     // wenn nicht -> erste Reihe suchen in der nicht alles Luft
+    
+    levelAnfangX = null;
+    levelAnfangY = null;
+    levelEndeX = null;
+    levelEndeY = null;
 
     for (int ix = 0; ix < handler.getPanelLevelEditor().getButtonLaengeX(); ix++)
     {
@@ -128,12 +171,18 @@ public class LevelFileWriter
       {
         if (handler.getPanelLevelEditor().getButtonLaengeY()-1 == y)
         {
+         
           levelEndeX = ix-1;
         }
         y++;
       }
       y = 0;
 
+    }
+    
+    if(levelEndeX == null)
+    {
+      levelEndeX = handler.getPanelLevelEditor().getButtonLaengeX()-1;
     }
 
     System.out.println("Ende" +levelEndeX);
@@ -168,6 +217,11 @@ public class LevelFileWriter
       }
       x = 0;
 
+    }
+    
+    if(levelEndeY == null)
+    {
+      levelEndeY = handler.getPanelLevelEditor().getButtonLaengeY()-1;
     }
 
     System.out.println("Ende Y " +levelEndeY);

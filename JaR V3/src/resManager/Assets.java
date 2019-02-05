@@ -8,10 +8,13 @@ import javax.imageio.ImageIO;
 
 public class Assets
 {
-  static SpriteSheet sheet;
+  static SpriteSheet sheet, sheet_Buttons;
 
   private static int breite = 64;
   private static int hoehe = 64;
+  
+  private static int breiteB = 90;
+  private static int hoeheB = 90;
 
   public static BufferedImage[] texturen = new BufferedImage[21];
 
@@ -19,13 +22,17 @@ public class Assets
                               marienKaeferLinks, marienKaeferRechts, checkPointUnten, checkPointObenAus, 
                               checkPointObenAn, bieneLinks, bieneRechts, wasser, seerose, devBlock, herz,
                               fischOben, fischUnten, tod, spawn, ziel, weiss, blau, itemFeuerKugel, itemFeuer,
-                              itemSchuh, itemLebenPlus, anzeigeAktuellesItem;
+                              itemSchuh, itemLebenPlus, anzeigeAktuellesItem,
+                              eichhoernchenRechts, eichhoernchenLinks, nuss, stern, trampolin, baum, ast, haus,
+                              //Buttons
+                              buttonLevelSelect000, buttonLevelSelect100, buttonLevelSelect101, buttonLevelSelect110, buttonLevelSelect111;
 
   public void init()
   {
     try
     {
       sheet = new SpriteSheet(ImageIO.read(getClass().getResource("/textures/TilesSheet.png")));
+      sheet_Buttons = new SpriteSheet(ImageIO.read(getClass().getResource("/textures/TileSheet_Buttons.png")));
     } catch (IOException e)
     {
       e.printStackTrace();
@@ -62,7 +69,22 @@ public class Assets
     itemSchuh = sheet.crop(breite*7, 0, breite, hoehe);
     itemLebenPlus = sheet.crop(breite*8, 0, breite, hoehe);
     anzeigeAktuellesItem = sheet.crop(breite*5, hoehe, breite, hoehe);
-
+    eichhoernchenRechts = sheet.crop(breite*5, hoehe*3, breite, hoehe);
+    eichhoernchenLinks = sheet.crop(breite*5, hoehe*2, breite, hoehe);
+    stern = sheet.crop(breite*2, hoehe*5, breite, hoehe);
+    nuss = sheet.crop(breite*5, hoehe*4, breite, hoehe);
+    baum = sheet.crop(breite*7, hoehe, breite*3, hoehe*4);
+    ast = sheet.crop(0, hoehe*5, breite*2, hoehe);
+    haus = sheet.crop(breite*7, hoehe*6, breite*3, hoehe*3);
+    trampolin = sheet.crop(breite*3, hoehe*5, breite, hoehe);
+    
+    //Buttons LevelSelect
+    buttonLevelSelect000 = sheet_Buttons.crop(0, 0, breiteB, hoeheB);
+    buttonLevelSelect100 = sheet_Buttons.crop(breiteB, 0, breiteB, hoeheB);
+    buttonLevelSelect101 = sheet_Buttons.crop(breiteB*2, 0, breiteB, hoeheB);
+    buttonLevelSelect110 = sheet_Buttons.crop(breiteB*3, 0, breiteB, hoeheB);
+    buttonLevelSelect111 = sheet_Buttons.crop(breiteB*4, 0, breiteB, hoeheB);
+    
     
     
 

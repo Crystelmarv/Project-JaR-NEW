@@ -117,6 +117,19 @@ public class Tastatur
       strHelp = false;
     });
   }
+  
+  public static void allKeysNotPressed()
+  {
+    moveRight = false;
+    moveLeft = false;
+    moveUp = false;
+    moveDown = false;
+    shiftHelp = false; 
+    strHelp = false;
+    pause = false;
+    esc = false;
+    useItem = false;
+  }
 
   public static boolean isMoveRight()
   {

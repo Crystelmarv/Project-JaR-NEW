@@ -5,14 +5,17 @@ import gui.FrameMain;
 public class Kamera
 {
   
-  private float x, y;
-  private boolean anfang = true;
-  private boolean ende = false;
-
-  public Kamera(float x, float y)
+  private int x, y;
+  private int levelAnfangX, levelAnfangY, levelEndeX, levelEndeY;
+ 
+  public Kamera()
   {
-    this.x = x;
-    this.y = y;
+
+    levelAnfangX = 0;
+    levelAnfangY = 0;
+    
+    levelEndeX = LevelCreator.levelID[0].length;
+    levelEndeY = LevelCreator.levelID.length;
   }
 
   
@@ -28,35 +31,37 @@ public class Kamera
   }
 
 
-  public void update(Player player)
+  public void update(Handler handler)
   {
-    if(anfang == true)
-    {
-      anfang(player);
-    }
-    else
-    {
-      x = player.getX()-600;
-     
-    }
-  
+   
+    y = handler.getPlayer().getY()-600;
+    x = handler.getPlayer().getX()-600;
     
-  }
-  
-  private void anfang(Player player)
-  {
-    
-    x = player.getX()-600;
-    if(x < FrameMain.BLOCKBREITE)
+    if(x < (levelAnfangX +1)* FrameMain.BLOCKBREITE)
     {
       x = FrameMain.BLOCKBREITE;
     }
     
-    if(x > ((300 * FrameMain.BLOCKBREITE) + 600))
+    if(x + FrameMain.FRAMEBREITE > (levelEndeX -1)* FrameMain.BLOCKBREITE)
     {
-      x = (300 * FrameMain.BLOCKBREITE) - 600;
-          
+      x = ((levelEndeX-1) * FrameMain.BLOCKBREITE) - FrameMain.FRAMEBREITE;
     }
-    y = player.getY()-600;
+    
+    if(y < (levelAnfangY +1)* FrameMain.BLOCKHOEHE)
+    {
+      y = FrameMain.BLOCKHOEHE;
+    }
+    
+    
+    if(y + FrameMain.FRAMEHOEHE > (levelEndeY -1)* FrameMain.BLOCKHOEHE)
+    {
+      y = ((levelEndeY-1) * FrameMain.BLOCKHOEHE) - FrameMain.FRAMEHOEHE;
+    }
+    
+    //this.x = x ;
+  //  this.y = y ;
+   
   }
+  
+
 }

@@ -11,6 +11,7 @@ import game.Handler;
 import gui.DialogPause;
 import gui.PanelGame;
 import gui.PanelLevelSelect;
+import resManager.Tastatur;
 import resManager.Timer;
 
 public class StateGame extends State
@@ -55,7 +56,7 @@ public class StateGame extends State
   @Override
   public void stateUpdate()
   {
-   
+    Tastatur.allKeysNotPressed();
     panelGame.setVisible(true);
     panelGame.setLevelErstellt(false);
     

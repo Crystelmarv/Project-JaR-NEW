@@ -1,7 +1,5 @@
 package game;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 
 import resManager.Assets;
@@ -10,8 +8,9 @@ public class AnzeigeAktuellesItem
 {
   private Handler handler;
 
-  private int apfel = 0;
-  private int x, y;
+
+  private int x=1000;
+  private int y=100;
 
   public AnzeigeAktuellesItem(Handler handler)
   {
@@ -35,10 +34,6 @@ public class AnzeigeAktuellesItem
 
   }
 
-  public void update()
-  {
-    x = handler.getPlayer().getX() + 400;
-    y = handler.getPlayer().getY() - 500;
-  }
+  
 
 }

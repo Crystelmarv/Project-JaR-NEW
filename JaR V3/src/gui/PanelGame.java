@@ -18,6 +18,7 @@ import game.Kamera;
 import game.Level;
 import game.LevelCreator;
 import resManager.Assets;
+import resManager.LevelFileReader;
 import resManager.Tastatur;
 import resManager.Timer;
 import states.StateGame;
@@ -52,6 +53,7 @@ public class PanelGame extends JPanel
     requestFocus();
     
     handler.setPanelGame(this);
+    
     
    
 

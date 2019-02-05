@@ -16,34 +16,30 @@ public class Level
   private boolean levelGelesen = false;
   private Player player;
   private Handler handler;
-  private Kamera kamera;
   private LevelCreator levelCreator;
-  private AnzeigeApfel anzeigeApfel;
-  private AnzeigeAktuellesItem anzeigeAktuellesItem;
-  private Leben leben;
   private ArrayList<Entity> entityList = new ArrayList<>();
+  private ArrayList<Entity> leiterList = new ArrayList<>();
+
+  private Hud hud;
+  private Kamera kamera;
 
   public Level(Handler handler) throws IOException
   {
     this.handler = handler;
     handler.setLevel(this);
-  
+
     levelCreator = new LevelCreator(handler);
     LevelFileReader.levelDateiLesen(handler);
-    LevelFileReader.tempArrayEinlesen(handler);
+
     levelCreator.levelErstellen();
-    anzeigeApfel = new AnzeigeApfel(handler);
-    anzeigeAktuellesItem = new AnzeigeAktuellesItem(handler);
-    leben = new Leben(handler);
-    
-  
+
     handler.setLevelCreator(levelCreator);
-    handler.setAnzeigeApfel(anzeigeApfel);
-    handler.setLeben(leben);
-  
+
     levelGelesen = true;
-    kamera = new Kamera(0, 0);
     player = new Player(handler);
+
+    hud = new Hud(levelCreator, handler);
+    kamera = new Kamera();
 
   }
 
@@ -52,6 +48,7 @@ public class Level
     Graphics2D g2d = (Graphics2D) g;
     g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
+    kamera.update(handler);
     //////////////////////////////////////////
     g2d.translate((int) -kamera.getX(), (int) -kamera.getY());
 
@@ -67,7 +64,6 @@ public class Level
           levelCreator.levelObjects[iy][ix].paint(g2d);
 
         }
-
       }
 
       // EntityList
@@ -77,23 +73,20 @@ public class Level
       {
         entityList.get(i).paint(g);
       }
-      
-      leben.paint(g);
-      anzeigeApfel.paint(g);
-      anzeigeAktuellesItem.paint(g);;
+
       player.paint(g2d);
 
       ///////////////////////////////////
-      g2d.translate(kamera.getX(), kamera.getY());
 
+      g2d.translate((int) kamera.getX(), (int) kamera.getY());
+
+      hud.paint(g2d);
     }
-
   }
 
   public void update()
   {
     int iy, ix;
-
 
     for (iy = 0; iy < LevelCreator.levelID.length; iy++)
     {
@@ -108,14 +101,8 @@ public class Level
     {
       entityList.get(i).update();
     }
-    
-    
-    leben.update();
-    anzeigeApfel.update();
-    anzeigeAktuellesItem.update();
-    kamera.update(player);
-    player.update();
 
+    player.update();
   }
 
   public boolean isLevelGelesen()
@@ -142,9 +129,30 @@ public class Level
   {
     entityList.remove(ent);
   }
-  
+
   public int getEntityListSize()
   {
     return entityList.size();
   }
+
+  public int getLeiterListSize()
+  {
+    return leiterList.size();
+  }
+
+  public Entity getLeiter(int i)
+  {
+    return leiterList.get(i);
+  }
+
+  public void setLeiter(Entity ent)
+  {
+    leiterList.add(ent);
+  }
+
+  public void removeLeiter(Entity ent)
+  {
+    leiterList.remove(ent);
+  }
+
 }

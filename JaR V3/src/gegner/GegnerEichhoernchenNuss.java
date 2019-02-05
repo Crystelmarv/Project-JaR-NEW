@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Handler;
+import resManager.Assets;
 
 public class GegnerEichhoernchenNuss extends Gegner
 {
@@ -46,8 +47,7 @@ public class GegnerEichhoernchenNuss extends Gegner
   @Override
   public void paint(Graphics g)
   {
-    g.setColor(Color.BLUE);
-    g.fillOval(x, y, 22, 22);
+    g.drawImage(Assets.nuss, x, y , null);
 
   }
 

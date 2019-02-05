@@ -11,7 +11,7 @@ public class Leben
   private final int MAXLEBEN = 5;
   private int aktuelleLeben = 3;
   private int[] x;
-  private int y;
+  private int y=0;
   
   private Handler handler;
 
@@ -19,6 +19,8 @@ public class Leben
   {
     this.handler = handler;
     x = new int[MAXLEBEN];
+    x[0]=0;
+    update();
   }
   
   public void paint(Graphics g)
@@ -34,13 +36,13 @@ public class Leben
   public void update()
   {
     int i;
-    
-    x[0] = handler.getPlayer().getX() - 500;
-    y = handler.getPlayer().getY() -500;
+    this.x[0] = 100;
+    this.y = y + 100;
+  
     
     for(i = 1; i< aktuelleLeben; i++)
     {
-      x[i] = x[i-1] + 100;
+      this.x[i] = this.x[i-1] + 100;
     }
     
     isTod();

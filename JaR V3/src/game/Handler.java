@@ -21,6 +21,7 @@ public class Handler
   private AnzeigeApfel anzeigeApfel;
   private Level level;
   private Leben leben;
+  private Stoppuhr stoppuhr;
   private PlayerItemManager itemManager;
   private PanelEditorLevel panelLevelEditor;
   private PanelOptionen panelOptionne;
@@ -194,6 +195,16 @@ public class Handler
   public void setPanelOptionne(PanelOptionen panelOptionne)
   {
     this.panelOptionne = panelOptionne;
+  }
+
+  public Stoppuhr getStoppuhr()
+  {
+    return stoppuhr;
+  }
+
+  public void setStoppuhr(Stoppuhr stoppuhr)
+  {
+    this.stoppuhr = stoppuhr;
   }
 
   

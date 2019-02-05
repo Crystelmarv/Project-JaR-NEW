@@ -1,6 +1,5 @@
 package blocke;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Entity;

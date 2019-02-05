@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 
@@ -71,6 +72,9 @@ public class PanelEditorLevel extends JPanel implements ActionListener
 
   // Frame BlockAusWahl
   private FrameLevelEditorBlockAuswahl frameBlockAuswahl;
+  
+  //Wurde gespeichert?
+  private boolean gespeichert = false;
 
   public PanelEditorLevel(Handler handler)
   {
@@ -85,8 +89,8 @@ public class PanelEditorLevel extends JPanel implements ActionListener
 
   public void PanelErstellen()
   {
+    gespeichert = false;
     
-
     frameBlockAuswahl = new FrameLevelEditorBlockAuswahl();
     frameConfig = new FrameEditorConfig(this);
 
@@ -259,7 +263,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
     {
       try
       {
-        LevelFileWriter.speichern(handler, frameConfig);
+        gespeichert = LevelFileWriter.speichern(handler, frameConfig);
       } catch (IOException e)
       {
         // TODO Auto-generated catch block
@@ -293,12 +297,20 @@ public class PanelEditorLevel extends JPanel implements ActionListener
       }
     } else if (menuItemHauptMenue.equals(b.getSource()))
     {
-      panelViewport.setVisible(false);
-      handler.getFrameMain().setJMenuBar(null);
-      frameBlockAuswahl.setVisible(false);
-      StateManager.setState(handler.getStateHauptMenue());
-      StateManager.getState().stateUpdate();
-
+      if(gespeichert == true)
+      {
+        hauptmenue();
+      }
+      else
+      {
+        int ein = JOptionPane.showConfirmDialog(null, "Sicher zum Hauptmenü? Sie haben noch nicht gespeichert!", "Sicher?", JOptionPane.YES_NO_OPTION);
+        if(ein == 0)
+        {
+          hauptmenue();
+        }
+        
+      }
+    
     } else
 
     {
@@ -314,6 +326,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
             ids[i][j] = resManager.Assets.getID(frameBlockAuswahl.getTexture());
             letzterButtonX = j;
             letzterButtonY = i;
+            gespeichert = false;
             if (shiftGestezt == true && shiftHelpAktiv == true)
             {
               zweiterButtonGedrueckt = true;
@@ -345,6 +358,16 @@ public class PanelEditorLevel extends JPanel implements ActionListener
 
       }
     }
+
+  }
+  
+  private void hauptmenue()
+  {
+    panelViewport.setVisible(false);
+    handler.getFrameMain().setJMenuBar(null);
+    frameBlockAuswahl.setVisible(false);
+    StateManager.setState(handler.getStateHauptMenue());
+    StateManager.getState().stateUpdate();
 
   }
 

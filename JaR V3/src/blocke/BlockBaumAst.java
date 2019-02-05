@@ -1,10 +1,10 @@
 package blocke;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Handler;
 import items.Item;
+import resManager.Assets;
 
 public class BlockBaumAst extends Item
 {
@@ -19,8 +19,7 @@ public class BlockBaumAst extends Item
   @Override
   public void paint(Graphics g)
   {
-    g.setColor(Color.DARK_GRAY);
-    g.fillRect(x, y, BREITE * 3, HOEHE);
+    g.drawImage(Assets.ast, x, y , null);
 
   }
 

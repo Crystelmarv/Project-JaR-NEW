@@ -23,10 +23,10 @@ import states.StatePause;
 
 public class FrameMain extends JFrame
 {
- 
+
   // Frame
-  final static int FRAMEHOEHE = 900;
-  final static int FRAMEBREITE = 1450;
+  public final static int FRAMEHOEHE = 900;
+  public final static int FRAMEBREITE = 1450;
 
   // Größe der Blöcke
   public final static int BLOCKBREITE = 64;
@@ -51,7 +51,7 @@ public class FrameMain extends JFrame
 
     // Frame
     setSize(FRAMEBREITE, FRAMEHOEHE);
-    setTitle("JaR - BETA 1.1");
+    setTitle("JaR - BETA 1.2 - Entwicklerversion");
     setResizable(false);
     setLocationRelativeTo(null);
     setVisible(true);
@@ -80,8 +80,7 @@ public class FrameMain extends JFrame
 
     Tastatur.standartKeyBinding(handler.getPanelGame());
     Tastatur.standartKeyBinding(handler.getPanelLevelEditor());
- 
-    
+
     StateManager.setState(stateHauptMenue);
     StateManager.getState().stateUpdate();
 
@@ -98,33 +97,31 @@ public class FrameMain extends JFrame
       @Override
       public void keyReleased(KeyEvent e)
       {
-        if(StateManager.getState().equals(handler.getStateGame()))
+        if (StateManager.getState().equals(handler.getStateGame()))
         {
-         // handler.getPlayer().keyReleased(e);
-       //   handler.getPanelGame().keyReleased(e);
-   
-          
-            }
-        if(StateManager.getState().equals(handler.getStateEditor()))
-        {
-       //   handler.getPanelLevelEditor().keyReleased(e);
+          // handler.getPlayer().keyReleased(e);
+          // handler.getPanelGame().keyReleased(e);
+
         }
-        
+        if (StateManager.getState().equals(handler.getStateEditor()))
+        {
+          // handler.getPanelLevelEditor().keyReleased(e);
+        }
 
       }
 
       @Override
       public void keyPressed(KeyEvent e)
       {
-        if(StateManager.getState().equals(handler.getStateGame()))
+        if (StateManager.getState().equals(handler.getStateGame()))
         {
-       // handler.getPlayer().keyPressed(e);
-       // handler.getPanelGame().keyPressed(e);
-     
+          // handler.getPlayer().keyPressed(e);
+          // handler.getPanelGame().keyPressed(e);
+
         }
-        if(StateManager.getState().equals(handler.getStateEditor()))
+        if (StateManager.getState().equals(handler.getStateEditor()))
         {
-     //   handler.getPanelLevelEditor().keyPressed(e);
+          // handler.getPanelLevelEditor().keyPressed(e);
         }
       }
     });
@@ -138,8 +135,6 @@ public class FrameMain extends JFrame
   {
     new FrameMain();
   }
-
- 
 
   public void gameLoop() throws InterruptedException, IOException
   {
@@ -175,6 +170,5 @@ public class FrameMain extends JFrame
       }
     }
   }
- 
 
 }

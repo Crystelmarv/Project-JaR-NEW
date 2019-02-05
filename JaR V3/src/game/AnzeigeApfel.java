@@ -8,14 +8,15 @@ import resManager.Assets;
 
 public class AnzeigeApfel
 {
-  private Handler handler;
+  private LevelCreator levelCreator;
   
   private int apfel = 0;
-  private int x,y;
+  private int x=1200;
+  private int y=100;
 
-  public AnzeigeApfel(Handler handler)
+  public AnzeigeApfel(LevelCreator levelCreator)
   {
-    this.handler = handler;
+    this.levelCreator = levelCreator;
   }
   
   public void paint(Graphics g)
@@ -26,18 +27,19 @@ public class AnzeigeApfel
     g.setFont(font);
     g.setColor(Color.black);
     g.drawString(Integer.toString(apfel) + "/" + 
-    (Integer.toString(handler.getLevelCreator().getMoeglicheAepfel())),
+    (Integer.toString(levelCreator.getMoeglicheAepfel())),
         x+80, y+45);
   }
   
-  public void update()
-  {
-    x = handler.getPlayer().getX() + 600;
-    y = handler.getPlayer().getY() - 500;
-  }
-
+ 
   public void apfelPlus()
   {
     apfel++;
   }
+
+  public int getApfel()
+  {
+    return apfel;
+  }
+  
 }

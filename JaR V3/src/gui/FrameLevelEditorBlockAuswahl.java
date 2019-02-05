@@ -27,7 +27,7 @@ public class FrameLevelEditorBlockAuswahl extends JFrame implements ActionListen
     setResizable(false);
     setLocation(0, 100);
     setLayout(null);
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 
     for (i = 0; i < buttons.length / 3; i++)
     {

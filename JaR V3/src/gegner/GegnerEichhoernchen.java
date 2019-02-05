@@ -1,9 +1,9 @@
 package gegner;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Handler;
+import resManager.Assets;
 import resManager.Timer;
 
 public class GegnerEichhoernchen extends Gegner
@@ -32,8 +32,7 @@ public class GegnerEichhoernchen extends Gegner
   @Override
   public void paint(Graphics g)
   {
-   g.setColor(Color.orange);
-   g.fillRect(x, y, HOEHE, BREITE);
+    g.drawImage(Assets.eichhoernchenLinks, x, y, null);
     
   }
 

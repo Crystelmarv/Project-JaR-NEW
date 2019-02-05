@@ -1,10 +1,10 @@
 package blocke;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 import game.Entity;
 import game.Handler;
+import resManager.Assets;
 
 public class BlockBaumStamm extends Entity
 {
@@ -23,8 +23,7 @@ public class BlockBaumStamm extends Entity
   @Override
   public void paint(Graphics g)
   {
-   g.setColor(Color.MAGENTA);
-   g.fillRect(x, y-HOEHE*6, BREITE, HOEHE*7);
+    g.drawImage(Assets.baum, x, y-HOEHE*3, null);
     
   }
 

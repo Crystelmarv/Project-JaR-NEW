@@ -6,6 +6,8 @@ import java.io.IOException;
 import blocke.Block;
 import blocke.BlockBaumStamm;
 import blocke.BlockItem;
+import blocke.BlockLeiter;
+import blocke.BlockOneTouch;
 import blocke.BlockSchild;
 import blocke.BlockTrampolin;
 import blocke.BlockZerstoerbar;
@@ -130,6 +132,15 @@ public class LevelCreator
         case 36:
           levelObjects[iy][ix] = new BlockBaumStamm(x, y, levelID[iy][ix], handler);
          break;
+         //One Touch
+        case 38:
+          levelObjects[iy][ix] = new BlockOneTouch(x, y, levelID[iy][ix], handler);
+          break;
+
+          //Leiter
+        case 39:
+          levelObjects[iy][ix] = new BlockLeiter(x, y, levelID[iy][ix], handler);
+          break;
 
         default:
           break;
@@ -139,13 +150,6 @@ public class LevelCreator
       x = 0;
       y = y + FrameMain.BLOCKHOEHE;
     }
-    
-    rahmenKontrolle();
-
-  }
-  
-  private void rahmenKontrolle()
-  {
     
   }
 

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import game.Handler;
 import gui.PanelEditorLevel;
+import resManager.Tastatur;
 
 public class StateEditor extends State
 {
@@ -38,6 +39,7 @@ public class StateEditor extends State
   @Override
   public void stateUpdate()
   {
+    Tastatur.allKeysNotPressed();
     panelEditorLevel.setVisible(true);
     panelEditorLevel.PanelErstellen();
     frameErstellt = true;

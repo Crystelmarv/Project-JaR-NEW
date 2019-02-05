@@ -5,6 +5,8 @@ import java.awt.Graphics;
 
 import game.Entity;
 import game.Handler;
+import gui.FrameMain;
+import resManager.Assets;
 
 public class BlockTrampolin extends Entity
 {
@@ -17,8 +19,9 @@ public class BlockTrampolin extends Entity
   @Override
   public void paint(Graphics g)
   {
-    g.setColor(Color.CYAN);
-    g.fillRect(x, y, BREITE, HOEHE);
+    g.setColor(Color.WHITE);
+    g.fillRect(x, y, FrameMain.BLOCKBREITE, FrameMain.BLOCKHOEHE);
+    g.drawImage(Assets.trampolin, x, y, null);
 
   }
 

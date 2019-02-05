@@ -29,7 +29,7 @@ public class FrameEditorConfig extends JFrame implements ActionListener
     setLocationRelativeTo(null);
     setLayout(null);
     setVisible(false);
-    
+    setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     
     labelLevelName = new JLabel("Level Name:");
     textFieldLevelName = new JTextField(20);
