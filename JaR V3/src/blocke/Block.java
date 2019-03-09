@@ -56,7 +56,7 @@ public class Block extends Entity
       break;
       //DevBlock
     case 22:
-      g.drawImage(Assets.devBlock, x, y, null);
+      g.drawImage(Assets.weiss, x, y, null);
       walkable = true;
       break;
     

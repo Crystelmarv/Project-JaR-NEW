@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Assets
 {
-  static SpriteSheet sheet, sheet_Buttons;
+  static SpriteSheet sheet, sheet_Buttons, sheet_Animation, sheet_Baum;
 
   private static int breite = 64;
   private static int hoehe = 64;
@@ -16,23 +16,32 @@ public class Assets
   private static int breiteB = 90;
   private static int hoeheB = 90;
 
-  public static BufferedImage[] texturen = new BufferedImage[21];
+  public static BufferedImage[] texturen = new BufferedImage[24];
 
   public static BufferedImage gras, erde, blauerBlock, orangerBlock, schild, orangerBlockOhneKreuz, apfel, 
                               marienKaeferLinks, marienKaeferRechts, checkPointUnten, checkPointObenAus, 
                               checkPointObenAn, bieneLinks, bieneRechts, wasser, seerose, devBlock, herz,
                               fischOben, fischUnten, tod, spawn, ziel, weiss, blau, itemFeuerKugel, itemFeuer,
                               itemSchuh, itemLebenPlus, anzeigeAktuellesItem,
-                              eichhoernchenRechts, eichhoernchenLinks, nuss, stern, trampolin, baum, ast, haus,
+                              eichhoernchenRechts, eichhoernchenLinks, nuss, stern, baum, ast, haus, oneTouch, wildschweinRechts, wildschweinLinks,
                               //Buttons
                               buttonLevelSelect000, buttonLevelSelect100, buttonLevelSelect101, buttonLevelSelect110, buttonLevelSelect111;
-
+                              
+  //Trampolin Animation
+  public static BufferedImage[] trampolinARunter = new BufferedImage[8];
+  public static BufferedImage[] trampolinAHoch = new BufferedImage[8];
+  
+  //Baum
+  public static BufferedImage baumS;
+      
   public void init()
   {
     try
     {
       sheet = new SpriteSheet(ImageIO.read(getClass().getResource("/textures/TilesSheet.png")));
       sheet_Buttons = new SpriteSheet(ImageIO.read(getClass().getResource("/textures/TileSheet_Buttons.png")));
+      sheet_Animation = new SpriteSheet(ImageIO.read(getClass().getResource("/textures/TileSheet_Animation.png")));
+      sheet_Baum = new SpriteSheet(ImageIO.read(getClass().getResource("/textures/Baum.png")));
     } catch (IOException e)
     {
       e.printStackTrace();
@@ -75,8 +84,13 @@ public class Assets
     nuss = sheet.crop(breite*5, hoehe*4, breite, hoehe);
     baum = sheet.crop(breite*7, hoehe, breite*3, hoehe*4);
     ast = sheet.crop(0, hoehe*5, breite*2, hoehe);
-    haus = sheet.crop(breite*7, hoehe*6, breite*3, hoehe*3);
-    trampolin = sheet.crop(breite*3, hoehe*5, breite, hoehe);
+    haus = sheet.crop(breite*6, hoehe*6, breite*4, hoehe*4);
+    oneTouch = sheet.crop(breite*9, 0, breite, hoehe);
+    wildschweinLinks = sheet.crop(breite*2, hoehe*5, breite*2, hoehe);
+    wildschweinRechts = sheet.crop(breite*4, hoehe*5, breite*2, hoehe);
+    
+    //Baum
+    baumS =  sheet_Baum.crop(0, 0, 900, 900);
     
     //Buttons LevelSelect
     buttonLevelSelect000 = sheet_Buttons.crop(0, 0, breiteB, hoeheB);
@@ -84,6 +98,20 @@ public class Assets
     buttonLevelSelect101 = sheet_Buttons.crop(breiteB*2, 0, breiteB, hoeheB);
     buttonLevelSelect110 = sheet_Buttons.crop(breiteB*3, 0, breiteB, hoeheB);
     buttonLevelSelect111 = sheet_Buttons.crop(breiteB*4, 0, breiteB, hoeheB);
+    
+    //Trampolin Animation
+    
+    for(int i = 0; i < 8; i++)
+    {
+      trampolinARunter[i] = sheet_Animation.crop(breite * i, 0, breite, hoehe);
+    }
+    
+    int j = 0;
+    for(int i = 7; i >= 0; i--)
+    {
+      trampolinAHoch[j] = sheet_Animation.crop(breite * i, 0, breite, hoehe);
+      j++;
+    }
     
     
     
@@ -93,7 +121,7 @@ public class Assets
     texturen[2] = checkPointObenAn;
     texturen[3] = orangerBlock;
     texturen[4] = orangerBlockOhneKreuz;
-    texturen[5] = schild;
+    texturen[5] = wildschweinLinks;
     texturen[6] = devBlock;
     texturen[7] = wasser;
     texturen[8] = seerose;
@@ -109,6 +137,12 @@ public class Assets
     texturen[18] = itemFeuer;
     texturen[19] = itemSchuh;
     texturen[20] = itemLebenPlus;
+    texturen[21] = trampolinARunter[0];
+    texturen[22] = oneTouch;
+    texturen[23] = eichhoernchenLinks;
+  
+   
+    
     
 
     
@@ -136,7 +170,7 @@ public class Assets
       id = "32";
       break;
     case 5:
-      id = "19";
+      id = "75";
       break;
     case 6:
       id = "22";
@@ -183,6 +217,17 @@ public class Assets
     case 20:
       id = "51";
       break;
+    case 21:
+      id = "35";
+      break;
+    case 22:
+      id = "38";
+      break;
+    case 23:
+      id = "74";
+      break;
+
+ 
       
       
       

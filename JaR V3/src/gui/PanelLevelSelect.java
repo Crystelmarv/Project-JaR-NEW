@@ -8,22 +8,19 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import game.DreiApfelWertung;
 import game.Handler;
 import resManager.Assets;
 import resManager.LevelFileReader;
-import resManager.LevelFileWriter;
-import states.StateGame;
 import states.StateManager;
 
 public class PanelLevelSelect extends JPanel implements ActionListener
 {
   private Handler handler;
 
-  private final int ANZAHLLEVEL = 3;
+  private static final int ANZAHLLEVEL = 4;
   private JButton[] bts = new JButton[ANZAHLLEVEL];
 
   private JButton buttonZurueck;
@@ -48,6 +45,7 @@ public class PanelLevelSelect extends JPanel implements ActionListener
       setTextLevelNr(i);
       bts[i].setIconTextGap(0);
       bts[i].setBounds(x, y, 90, 90);
+      bts[i].setBorderPainted(false);
       setTexture(i);
       
        setMouseListener(i);
@@ -129,9 +127,7 @@ public class PanelLevelSelect extends JPanel implements ActionListener
 
   private void setTexture(int buttonNr)
   {
-    int levelGeschafft = 0;
-    int alleAepfel = 0;
-    int zeit = 0;
+    
 
     if (DreiApfelWertung.wertung[buttonNr][0] == 0 && DreiApfelWertung.wertung[buttonNr][1] == 0
         && DreiApfelWertung.wertung[buttonNr][2] == 0)
@@ -175,6 +171,11 @@ public class PanelLevelSelect extends JPanel implements ActionListener
       }
       
     });
+  }
+
+  public static int getAnzahllevel()
+  {
+    return ANZAHLLEVEL;
   }
 
 }

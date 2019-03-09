@@ -21,7 +21,7 @@ public class GegnerEichhoernchenNuss extends Gegner
 
     if (right == true)
     {
-      x = x + 84;
+      x = x + 30;
     } else
     {
       x = x - 20;

@@ -13,6 +13,7 @@ import javax.swing.undo.StateEdit;
 import game.Handler;
 import resManager.Tastatur;
 import states.State;
+import states.StateCredits;
 import states.StateEditor;
 import states.StateGame;
 import states.StateHauptMenue;
@@ -39,12 +40,16 @@ public class FrameMain extends JFrame
   private State stateLevelSelect;
   private State stateOptionen;
   private State statePause;
+  private State stateCredits;
 
   // Handler
   private Handler handler;
 
   // booleans für Init
   private boolean frameInit = false;
+  
+  //FPS
+  private static double fps = 100.0;
 
   public FrameMain() throws InterruptedException, IOException
   {
@@ -70,6 +75,7 @@ public class FrameMain extends JFrame
     stateLevelSelect = new StateLevelSelect(handler);
     stateOptionen = new StateOptionen(handler);
     statePause = new StatePause(handler);
+    stateCredits = new StateCredits(handler);
 
     handler.setStateGame(stateGame);
     handler.setStateHauptMenue(stateHauptMenue);
@@ -77,6 +83,7 @@ public class FrameMain extends JFrame
     handler.setStateLevelSelect(stateLevelSelect);
     handler.setStateOptionen(stateOptionen);
     handler.setStatePause(statePause);
+    handler.setStateCredits(stateCredits);
 
     Tastatur.standartKeyBinding(handler.getPanelGame());
     Tastatur.standartKeyBinding(handler.getPanelLevelEditor());
@@ -139,7 +146,7 @@ public class FrameMain extends JFrame
   public void gameLoop() throws InterruptedException, IOException
   {
     // Timer
-    double fps = 100.0;
+    
     double timePerTick = 1000000000.0 / fps;
     double delta = 0.0;
     long now;
@@ -169,6 +176,16 @@ public class FrameMain extends JFrame
         timer = 0;
       }
     }
+  }
+
+  public static double getFps()
+  {
+    return fps;
+  }
+
+  public static void setFps(double fps)
+  {
+    FrameMain.fps = fps;
   }
 
 }

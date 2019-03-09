@@ -19,7 +19,7 @@ public class LevelTod extends Entity
   @Override
   public void paint(Graphics g)
   {
-   g.drawImage(Assets.tod, x, y, null);
+   g.drawImage(Assets.erde, x, y, null);
     
   }
 

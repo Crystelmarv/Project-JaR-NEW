@@ -34,10 +34,11 @@ public class Player
   private boolean lastPositionRight = false;
 
   private final float DEFAULT_SPEED = 4.75f;
-  private float speed = 20f; // DEFAULT_SPEED;
+  private float speed = DEFAULT_SPEED;
   private float gravity = 0.22f;
   private float maxFallingSpeed = 5.5f;
-  private float jumpStart = -8.7f;
+  private float DEFAULT_JUMPSTART = -8.7f;
+  private float jumpStart = DEFAULT_JUMPSTART;
 
   // Status
   private boolean tot = false;
@@ -340,6 +341,7 @@ public class Player
       dy = jumpStart;
       jump = false;
       fall = true;
+      jumpStart = DEFAULT_JUMPSTART;
     }
 
   }
@@ -482,6 +484,16 @@ public class Player
   public void setDoNotFall(boolean doNotFall)
   {
     this.doNotFall = doNotFall;
+  }
+
+  public void setJumpStart(float jumpStart)
+  {
+    this.jumpStart = jumpStart;
+  }
+  
+  public void setJumpStartDefault()
+  {
+    jumpStart = DEFAULT_JUMPSTART;
   }
 
 }

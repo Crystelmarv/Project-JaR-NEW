@@ -11,7 +11,7 @@ public class Leben
   private final int MAXLEBEN = 5;
   private int aktuelleLeben = 3;
   private int[] x;
-  private int y=0;
+  private int y=50;
   
   private Handler handler;
 
@@ -27,6 +27,7 @@ public class Leben
   {
     int i;
     
+    
     for (i = 0; i < aktuelleLeben; i++)
     {
       g.drawImage(Assets.herz, x[i], y, null);
@@ -37,7 +38,7 @@ public class Leben
   {
     int i;
     this.x[0] = 100;
-    this.y = y + 100;
+    
   
     
     for(i = 1; i< aktuelleLeben; i++)
@@ -63,15 +64,12 @@ public class Leben
       }
       else
       {
-        
-  
           try
           {
             handler.getPanelLevelEditor().levelTestenLaden();
             
           } catch (IOException e)
           {
-            // TODO Auto-generated catch block
             e.printStackTrace();
           }
       }

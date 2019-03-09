@@ -126,6 +126,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
     menuOptionen.add(menuItemHauptMenue);
 
     menuBar.add(menuOptionen);
+    System.out.println("MENP");
 
     menuItemSpeichern.addActionListener(this);
     menuItemOeffnen.addActionListener(this);
@@ -145,7 +146,10 @@ public class PanelEditorLevel extends JPanel implements ActionListener
         buttons[i][j].setBounds(x, y, 64, 64);
         ids[i][j] = "20";
         buttons[i][j].addActionListener(this);
+        buttons[i][j].setIcon(new ImageIcon(Assets.weiss));
         panelViewport.add(buttons[i][j]);
+       // buttons[i][j].setBorderPainted(false);
+        
 
         x = x + 64;
 
@@ -164,7 +168,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
 
   public void update()
   {
-    if (focus = true)
+    if (focus == true)
     {
       handler.getFrameMain().requestFocus();
     }
@@ -199,59 +203,7 @@ public class PanelEditorLevel extends JPanel implements ActionListener
   {
 
   }
-/*
-  public void keyReleased(KeyEvent e)
-  {
-    int key = e.getKeyCode();
 
-    switch (key)
-    {
-    case KeyEvent.VK_RIGHT:
-      right = false;
-      break;
-    case KeyEvent.VK_LEFT:
-      left = false;
-      break;
-    case KeyEvent.VK_UP:
-      up = false;
-      break;
-    case KeyEvent.VK_DOWN:
-      down = false;
-      break;
-    case KeyEvent.VK_SHIFT:
-      shift = false;
-      break;
-
-    }
-
-  }
-
-  public void keyPressed(KeyEvent e)
-  {
-    int key = e.getKeyCode();
-
-    switch (key)
-    {
-    case KeyEvent.VK_RIGHT:
-      right = true;
-      break;
-    case KeyEvent.VK_LEFT:
-      left = true;
-      break;
-    case KeyEvent.VK_UP:
-      up = true;
-      break;
-    case KeyEvent.VK_DOWN:
-      down = true;
-      break;
-    case KeyEvent.VK_SHIFT:
-      shift = true;
-      break;
-
-    }
-
-  }
-*/
   @Override
   public void actionPerformed(ActionEvent b)
   {
@@ -462,11 +414,13 @@ public class PanelEditorLevel extends JPanel implements ActionListener
   {
     handler.getPanelGame().setVisible(false);
     handler.getFrameMain().repaint();
+    handler.getPanelGame().setLevelEditorTest(false);
     StateManager.setState(handler.getStateEditor());
     StateManager.getState().stateUpdate();
 
     LevelFileReader.levelLesenEditor(handler);
     LevelFileReader.levelNameLaden(frameConfig);
+    
 
   }
 

@@ -22,7 +22,7 @@ public class BlockOneTouch extends Entity
   {
     if (walkable == false)
     {
-      g.drawImage(Assets.blauerBlock, x, y, null);
+      g.drawImage(Assets.oneTouch, x, y, null);
 
     }
     else

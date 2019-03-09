@@ -22,7 +22,7 @@ public class FrameLevelEditorBlockAuswahl extends JFrame implements ActionListen
     int y = 20;
     int k = 0;
 
-    setSize(310, 800);
+    setSize(310, 864);
     setTitle("JaR Level Editor");
     setResizable(false);
     setLocation(0, 100);

@@ -33,6 +33,10 @@ public class Hud
     y = 0;
 
   }
+  public void update()
+  {
+    leben.update();
+  }
 
   public Kamera getKamera()
   {

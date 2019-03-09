@@ -128,6 +128,23 @@ public class LevelFileWriter
       bufferedWriter.write("NAME");
       bufferedWriter.newLine();
       bufferedWriter.write(frameConfig.getLevelName());
+      bufferedWriter.newLine();
+      
+      bufferedWriter.write("ZEIT");
+      bufferedWriter.newLine();
+      bufferedWriter.write(frameConfig.getLevelZeit());
+      bufferedWriter.newLine();
+      
+      bufferedWriter.write("HIGHSCORE");
+      
+      for(int l = 0; l < 3; l++)
+      {
+        bufferedWriter.newLine();
+        bufferedWriter.write("99:99");
+      }
+      
+      
+
 
       bufferedWriter.close();
     } catch (IOException e)

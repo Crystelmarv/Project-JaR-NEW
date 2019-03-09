@@ -23,8 +23,15 @@ public class GegnerEichhoernchen extends Gegner
   {
     if (getBounds().intersects(handler.getPlayer().getBounds()))
     {
-      handler.getPlayer().setNichtAngreifbarTimerSet();
-      handler.getLeben().lebenMinus();
+      if (handler.getPlayer().isFall() == true)
+      {
+        handler.getPlayer().setJump();
+        handler.getLevel().removeEntity(gegner);
+      } else
+      {
+        handler.getPlayer().setNichtAngreifbarTimerSet();
+        handler.getLeben().lebenMinus();
+      }
     }
     
   }
@@ -32,7 +39,15 @@ public class GegnerEichhoernchen extends Gegner
   @Override
   public void paint(Graphics g)
   {
-    g.drawImage(Assets.eichhoernchenLinks, x, y, null);
+    if(blickRichtungRechts == false)
+    {
+      g.drawImage(Assets.eichhoernchenLinks, x, y+2, null);
+    }
+    else
+    {
+      g.drawImage(Assets.eichhoernchenRechts, x, y+2, null);
+    }
+    
     
   }
 

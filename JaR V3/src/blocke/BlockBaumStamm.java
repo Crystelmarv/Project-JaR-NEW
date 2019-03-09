@@ -23,7 +23,7 @@ public class BlockBaumStamm extends Entity
   @Override
   public void paint(Graphics g)
   {
-    g.drawImage(Assets.baum, x, y-HOEHE*3, null);
+    g.drawImage(Assets.baumS, x, y-HOEHE*12, null);
     
   }
 

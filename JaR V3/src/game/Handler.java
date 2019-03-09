@@ -5,6 +5,7 @@ import gui.PanelEditorLevel;
 import gui.PanelGame;
 import gui.PanelOptionen;
 import states.State;
+import states.StateCredits;
 
 public class Handler
 {
@@ -25,6 +26,7 @@ public class Handler
   private PlayerItemManager itemManager;
   private PanelEditorLevel panelLevelEditor;
   private PanelOptionen panelOptionne;
+  private State stateCredits;
   
   public Handler(FrameMain frameMain)
   {
@@ -206,6 +208,17 @@ public class Handler
   {
     this.stoppuhr = stoppuhr;
   }
+
+  public State getStateCredits()
+  {
+    return stateCredits;
+  }
+
+  public void setStateCredits(State stateCredits)
+  {
+    this.stateCredits = stateCredits;
+  }
+
 
   
 }

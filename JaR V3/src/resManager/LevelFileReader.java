@@ -266,6 +266,7 @@ public class LevelFileReader
       {
         bufferedWriter.write(currentLine);
         bufferedWriter.newLine();
+        System.out.println(highscore1);
         bufferedWriter.write(highscore1);
         currentLine = bufferedReader.readLine();
         bufferedWriter.newLine();
@@ -374,10 +375,25 @@ public class LevelFileReader
     frameConfig.setTextFieldLevelName(levelName);
 
     frameConfig.setLevelName(levelName);
+    
+    do
+    {
+      currentLine = eBufferedReader.readLine();
+    } while (!currentLine.regionMatches(0, trennerZeit, 0, trennerZeit.length()));
+
+    
+    currentLine = eBufferedReader.readLine();
+    System.out.println(currentLine);
+    
+    frameConfig.setTextFieldLevelZeit(currentLine);
+    frameConfig.setLevelZeit(currentLine);
+    
     bufferedReader.close();
     inputStream.close();
 
   }
+  
+ 
 
   public static void setLevelPfad(String levelP)
   {

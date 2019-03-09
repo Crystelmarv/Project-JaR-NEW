@@ -3,7 +3,9 @@ package game;
 
 
 import java.awt.Graphics;
+import java.io.IOException;
 
+import resManager.LevelFileReader;
 import resManager.Timer;
 
 public class Stoppuhr
@@ -49,7 +51,14 @@ public class Stoppuhr
   
     
     //g.drawString(String.format("%1,2f", zeit),  x, y);
-    g.drawString(minS + ":" + sekS,  x, y);
+    try
+    {
+      g.drawString(minS + ":" + sekS + "/" + LevelFileReader.zeitEinlesen(),  x, y);
+    } catch (IOException e)
+    {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 //    System.out.println((String.format("%tM", zeit)));
    // System.out.println(zeit);
   //  System.out.println(min + " : " + sek);

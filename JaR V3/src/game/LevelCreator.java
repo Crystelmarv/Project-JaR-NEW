@@ -118,6 +118,8 @@ public class LevelCreator
         case 72:
         case 73:
         case 74:
+        case 75:
+          
          
            levelObjects[iy][ix] = new GegnerSpawn(x, y, levelID[iy][ix], handler);
            

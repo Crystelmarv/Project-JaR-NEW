@@ -101,7 +101,7 @@ public class Level
     {
       entityList.get(i).update();
     }
-
+   hud.update();
     player.update();
   }
 

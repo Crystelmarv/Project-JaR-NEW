@@ -2,11 +2,12 @@ package game;
 
 import java.io.IOException;
 
+import gui.PanelLevelSelect;
 import resManager.LevelFileReader;
 
 public class DreiApfelWertung
 {
-  public static int wertung[][] = new int[3][3];
+  public static int wertung[][] = new int[PanelLevelSelect.getAnzahllevel()][PanelLevelSelect.getAnzahllevel()];
 
   public static int aktuellesLevel = 1;
 
@@ -14,6 +15,8 @@ public class DreiApfelWertung
   static String highScore1;
   static String highScore2;
   static String highScore3;
+
+  private static String zeit = "";
 
   public static void levelGechafft()
   {
@@ -93,9 +96,34 @@ public class DreiApfelWertung
     }
   }
 
+  private static void highscoreEinlesen(int i)
+  {
+    try
+    {
+      zeit = LevelFileReader.highscoreEinlesen(i);
+      switch (i)
+      {
+      case 1:
+        highScore1 = zeit;
+        break;
+      case 2:
+        highScore2 = zeit;
+        break;
+      case 3:
+        highScore3 = zeit;
+        break;
+
+      }
+    } catch (IOException e)
+    {
+      //
+      e.printStackTrace();
+    }
+  }
+
   public static void highscoreVergleich(String z)
   {
-    String zeit = "";
+
     String tem1;
     String tem2;
     String geschaffteZeit;
@@ -105,28 +133,40 @@ public class DreiApfelWertung
     int i = 3;
     int zeitMin = 0, zeitSek = 0, geschafftMin = 0, geschafftSek = 0;
     geschaffteZeit = z;
+
+    highscoreEinlesen(3);
+    highscoreEinlesen(2);
+    highscoreEinlesen(1);
+
+    System.out.println("1: " + highScore1);
+    System.out.println("2: " + highScore2);
+    System.out.println("3: " + highScore3);
+    /*
+     * tem1 = geschaffteZeit.substring(0, 2); tem2 = geschaffteZeit.substring(2, 4);
+     * zeitMitDoppelt = tem1 + ":" + tem2;
+     * 
+     * if (highScore1.equals("00:00")) { highscoreAnpassen(1, zeitMitDoppelt);
+     * abbruch = true; } else if (highScore2.equals("00:00")) { highscoreAnpassen(2,
+     * zeitMitDoppelt); abbruch = true; } else if (highScore3.equals("00:00")) {
+     * highscoreAnpassen(3, zeitMitDoppelt); abbruch = true;
+     * 
+     * }
+     */
     while (abbruch == false)
     {
-      try
+      switch (i)
       {
-        zeit = LevelFileReader.highscoreEinlesen(i);
-        switch (i)
-        {
-        case 1:
-          highScore1 = zeit;
-          break;
-        case 2:
-          highScore2 = zeit;
-          break;
-        case 3:
-          highScore3 = zeit;
-          break;
+      case 3:
+        highscoreEinlesen(i);
+        break;
+      case 2:
+        highscoreEinlesen(i);
+        break;
 
-        }
-      } catch (IOException e)
-      {
-        //
-        e.printStackTrace();
+      case 1:
+        highscoreEinlesen(i);
+        break;
+
       }
 
       // Zeit
@@ -147,8 +187,8 @@ public class DreiApfelWertung
       {
         geschafftSek = 0;
       }
-      System.out.println(zeitMin + ":" + zeitSek);
-      System.out.println(geschafftMin + ":" + geschafftSek);
+      System.out.println("high zum vergleich " + zeitMin + ":" + zeitSek);
+      System.out.println("geschafft zeitz" + geschafftMin + ":" + geschafftSek);
 
       zeitMitDoppelt = tem1 + ":" + tem2;
       if (zeitMin >= geschafftMin)
@@ -163,7 +203,7 @@ public class DreiApfelWertung
           } else
           {
             // schlechter
-            System.out.println("schlechter als " + i);
+            System.out.println("schlechter als " + i + "seks");
             abbruch = true;
           }
 
@@ -176,7 +216,7 @@ public class DreiApfelWertung
       } else
       {
         // schlechter
-        System.out.println("schlechter als " + i);
+        System.out.println("schlechter als " + i + "mins");
         abbruch = true;
       }
 
@@ -191,7 +231,6 @@ public class DreiApfelWertung
       LevelFileReader.writeHighscore(highScore1, highScore2, highScore3);
     } catch (IOException e)
     {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
